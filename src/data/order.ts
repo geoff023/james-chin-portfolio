@@ -23,16 +23,6 @@ export function orderName(o: Order): string {
   return [o.base, o.milk, o.gau && 'Gau', o.sugar, o.peng && 'Peng'].filter(Boolean).join(' ')
 }
 
-// What the issue on the cover is drinking before anyone orders.
-export const bandung: Drink = {
-  liquid: '#EE9AAB',
-  milk: null,
-  foam: '#F8D3DA',
-  foamH: 0.04,
-  ice: true,
-  fill: 0.8,
-}
-
 const mix = (a: string, b: string, t: number) => {
   const p = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
   const [x, y] = [p(a), p(b)]

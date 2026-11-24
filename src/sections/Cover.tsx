@@ -1,17 +1,16 @@
-import { useState } from 'react'
 import { Misregistered } from '../components/Misregistered'
 import { OrderBuilder } from '../components/OrderBuilder'
-import { currentIssue } from '../data/issues'
-import { bandung, drinkFor, orderName, type Order } from '../data/order'
+import { currentIssue, type Issue } from '../data/issues'
+import { drinkFor, orderName, type Order } from '../data/order'
 import { GlassStage } from './GlassStage'
 import s from './Cover.module.css'
 
-export function Cover() {
-  const [order, setOrder] = useState<Order | null>(null)
-  const drink = order ? drinkFor(order) : bandung
+// The glass pours whatever was ordered last, else the issue picked on the Shelf.
+export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | null; onOrder: (o: Order) => void }) {
+  const drink = order ? drinkFor(order) : issue.glass
   const label = order
     ? `A glass of ${orderName(order)}`
-    : 'A tall glass of bandung, pink rose-syrup milk with ice and a red straw'
+    : `A glass of ${issue.drink.toLowerCase()}, ${issue.drinkEn}`
 
   return (
     <section id="cover" className={s.cover} aria-labelledby="cover-title">
@@ -40,7 +39,7 @@ export function Cover() {
       <GlassStage className={s.glass} drink={drink} label={label} />
 
       <div className={s.order}>
-        <OrderBuilder order={order} onChange={setOrder} />
+        <OrderBuilder order={order} onChange={onOrder} />
       </div>
 
       <p className={`hand ${s.hint}`} aria-hidden="true">
