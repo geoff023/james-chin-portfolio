@@ -1,0 +1,34 @@
+.cursor {
+  position: fixed;
+  left: 0; top: 0;
+  z-index: 150;
+  pointer-events: none;
+  will-change: transform;
+}
+.ink {
+  position: absolute;
+  left: 0; top: 0;
+  width: 10px;
+  height: 10px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--riso-red);
+  mix-blend-mode: multiply;
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background-color 0.3s, border-color 0.3s;
+  border: 1.5px solid transparent;
+}
+/* over something clickable: an open red ring */
+.cursor[data-mode='link'] .ink { width: 38px; height: 38px; background: transparent; border-color: var(--riso-red); }
+/* over the glass: a filled disc that says tilt */
+.cursor[data-mode='tilt'] .ink { width: 58px; height: 58px; background: color-mix(in srgb, var(--riso-red) 85%, transparent); }
+.word {
+  position: absolute;
+  left: 0; top: 0;
+  translate: -50% -50%;
+  font-family: var(--hand);
+  font-size: 1.2rem;
+  color: #fffdf7;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.cursor[data-mode='tilt'] .word { opacity: 1; }

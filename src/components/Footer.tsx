@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { EMAIL } from '../sections/Letters'
 import { Cat, Kettle, KopiCup, Stools, useInView } from './Sketches'
+import { useMagnet } from './useMagnet'
 import s from './Footer.module.css'
 
 const focusChips = () =>
@@ -10,6 +11,7 @@ export function Footer() {
   const [ref, seen] = useInView<HTMLDivElement>('0px')
   const { pathname } = useLocation()
   const navigate = useNavigate()
+  const anotherRef = useMagnet<HTMLButtonElement>()
 
   // The glass is empty by now (it drains as you read). Offer a refill: back to the cover, chips focused.
   function orderAnother() {
@@ -29,7 +31,7 @@ export function Footer() {
           Finished already?
           <span className={`hand ${s.empty}`} aria-hidden="true">(the glass up top ran dry)</span>
         </p>
-        <button type="button" className={s.another} onClick={orderAnother}>
+        <button ref={anotherRef} type="button" className={s.another} onClick={orderAnother}>
           Order another ↑
         </button>
       </div>

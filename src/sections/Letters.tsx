@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { Misregistered } from '../components/Misregistered'
 import { KopiCup } from '../components/Sketches'
+import { useMagnet } from '../components/useMagnet'
 import s from './Letters.module.css'
 
 export const EMAIL = 'james@kurangmanis.example'
@@ -21,6 +22,7 @@ function check(d: FormData): Partial<Record<Field, string>> {
 
 export function Letters() {
   const form = useRef<HTMLFormElement>(null)
+  const postRef = useMagnet<HTMLButtonElement>()
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({})
   const [status, setStatus] = useState<Status>('idle')
   const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -119,7 +121,7 @@ export function Letters() {
                 </label>
               </div>
 
-              <button type="submit" className={s.post} disabled={status === 'sending'}>
+              <button ref={postRef} type="submit" className={s.post} disabled={status === 'sending'}>
                 {status === 'sending' ? 'Posting…' : 'Post it'}
               </button>
               {status === 'error' && (

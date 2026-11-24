@@ -29,7 +29,7 @@
   animation: drift 38s ease-in-out infinite alternate;
 }
 .a { background: var(--issue-accent); top: 8vh; right: -12vmax; }
-.b { background: var(--riso-yellow); top: 52vh; left: -16vmax; opacity: 0.3; animation-duration: 46s; animation-delay: -12s; }
+.b { background: var(--serving, var(--riso-yellow)); top: 52vh; left: -16vmax; opacity: 0.3; animation-duration: 46s; animation-delay: -12s; }
 .c { background: var(--issue-accent); bottom: -20vmax; left: 30vw; opacity: 0.25; animation-duration: 52s; animation-delay: -30s; }
 
 @keyframes drift {

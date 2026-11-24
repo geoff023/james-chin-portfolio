@@ -1,8 +1,10 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { createBrowserRouter, Outlet, ScrollRestoration, useOutletContext } from 'react-router-dom'
 import { Backdrop } from './components/Backdrop'
+import { Cursor } from './components/Cursor'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
+import { ShutterIntro } from './components/ShutterIntro'
 import { currentIssue, type Issue } from './data/issues'
 import type { Order } from './data/order'
 import { Home } from './routes/Home'
@@ -38,6 +40,8 @@ function Layout() {
       </main>
       <Footer />
       <ScrollRestoration />
+      <ShutterIntro />
+      <Cursor />
     </>
   )
 }

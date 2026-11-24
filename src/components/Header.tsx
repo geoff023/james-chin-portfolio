@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useMatch } from 'react-router-dom'
 import { currentIssue, issues, sections } from '../data/issues'
+import { servingAt } from '../data/serving'
 import s from './Header.module.css'
 
 // Running folio (page number follows the section in view) + Contents page menu.
@@ -9,6 +10,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
   const dialog = useRef<HTMLDialogElement>(null)
   const { pathname } = useLocation()
+  const [serving, setServing] = useState(() => servingAt(new Date().getHours()))
   // on an issue page the running head names that issue
   const slug = useMatch('/issues/:slug')?.params.slug
   const shown = issues.find((i) => i.slug === slug) ?? currentIssue
@@ -34,6 +36,15 @@ export function Header() {
     }
   }, [pathname])
 
+  // now serving: re-check every minute; the drink also tints one of the page washes
+  useEffect(() => {
+    const t = setInterval(() => setServing(servingAt(new Date().getHours())), 60_000)
+    return () => clearInterval(t)
+  }, [])
+  useEffect(() => {
+    document.documentElement.style.setProperty('--serving', serving.tint)
+  }, [serving])
+
   useEffect(() => {
     const d = dialog.current
     if (!d) return
@@ -50,7 +61,10 @@ export function Header() {
           <span className={s.sep}>—</span> Kurang Manis, Issue {shown.no}
         </span>
         <span className={s.sep}>—</span>
-        <span aria-live="polite">p. <span key={page} className={s.page}>{page}</span></span>
+        <span>p. <span key={page} className={s.page}>{page}</span></span>
+      </p>
+      <p className={`label ${s.serving}`}>
+        Now serving: <span key={serving.drink} className={s.servingDrink}>{serving.drink}</span>
       </p>
       <button className={`label ${s.toggle}`} onClick={() => setOpen(true)} aria-haspopup="dialog">
         Contents

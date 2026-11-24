@@ -37,7 +37,7 @@
   text-transform: uppercase;
   background: var(--paper);
   rotate: -2deg;
-  transition: transform 0.3s var(--ease-out), background-color 0.2s, color 0.2s;
+  transition: transform 0.3s var(--ease-out), translate 0.35s var(--ease-out), background-color 0.2s, color 0.2s;
 }
 .another:hover { background: var(--ink); color: var(--paper); transform: translateY(-3px) rotate(2deg); }
 .another:active { transform: scale(0.95); }

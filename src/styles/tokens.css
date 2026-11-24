@@ -10,6 +10,7 @@
   --riso-yellow: #f5cb4c;
   --riso-green: #8fbf7f;
   --issue-accent: #f2a7b5; /* overwritten per active issue */
+  --serving: #f5cb4c;      /* overwritten by the time of day (Now serving) */
   --hairline: color-mix(in srgb, var(--ink) 22%, transparent);
 
   /* type */
