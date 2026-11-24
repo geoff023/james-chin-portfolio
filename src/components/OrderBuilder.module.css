@@ -1,0 +1,69 @@
+.builder {
+  position: relative;
+  display: grid;
+  gap: 10px;
+}
+
+.ask { color: var(--ink-soft); }
+
+.rows { display: grid; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* little paper order chits at slightly different angles */
+.chip {
+  padding: 6px 11px 5px;
+  min-height: 32px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 1px 0 rgba(29, 26, 23, 0.08), 0 6px 14px -10px rgba(29, 26, 23, 0.5);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-stretch: 85%;
+  rotate: var(--tilt);
+  transition: transform 0.3s var(--ease-out), background-color 0.2s, color 0.2s, box-shadow 0.3s var(--ease-out);
+}
+.chip:hover { transform: translateY(-3px); box-shadow: 0 1px 0 rgba(29, 26, 23, 0.08), 0 12px 18px -12px rgba(29, 26, 23, 0.55); }
+.chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.chip:active { transform: translateY(1px) scale(0.97); }
+
+.gloss {
+  min-height: 2.6em;
+  max-width: 34ch;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+.gloss b { color: var(--ink); font-weight: 600; }
+
+/* receipt-printer chit */
+.chit {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  display: grid;
+  gap: 2px;
+  min-width: 170px;
+  padding: 10px 14px 16px;
+  background: #fffdf7;
+  color: var(--ink);
+  box-shadow: 0 10px 24px -14px rgba(29, 26, 23, 0.55);
+  rotate: 2deg;
+  /* torn receipt bottom */
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 10px 100%;
+  animation: print 0.9s steps(6, end);
+}
+.chitOrder {
+  font-family: var(--hand);
+  font-size: 1.6rem;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--riso-red);
+}
+@keyframes print {
+  from { clip-path: inset(100% 0 0 0); transform: translateY(14px); }
+  to { clip-path: inset(0); transform: none; }
+}

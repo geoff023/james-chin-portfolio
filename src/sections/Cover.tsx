@@ -1,9 +1,18 @@
+import { useState } from 'react'
 import { Misregistered } from '../components/Misregistered'
+import { OrderBuilder } from '../components/OrderBuilder'
 import { currentIssue } from '../data/issues'
-import { GlassPoster } from './GlassPoster'
+import { bandung, drinkFor, orderName, type Order } from '../data/order'
+import { GlassStage } from './GlassStage'
 import s from './Cover.module.css'
 
 export function Cover() {
+  const [order, setOrder] = useState<Order | null>(null)
+  const drink = order ? drinkFor(order) : bandung
+  const label = order
+    ? `A glass of ${orderName(order)}`
+    : 'A tall glass of bandung, pink rose-syrup milk with ice and a red straw'
+
   return (
     <section id="cover" className={s.cover} aria-labelledby="cover-title">
       <div className={`label ${s.dateline}`}>
@@ -28,12 +37,11 @@ export function Cover() {
         <a href="#letters" className={`label ${s.cta}`}>Taking commissions for 2027 ↘</a>
       </div>
 
-      <figure className={s.glass}>
-        <GlassPoster />
-        <figcaption className="visually-hidden">
-          A tall glass of bandung, pink rose-syrup milk with ice and a red straw.
-        </figcaption>
-      </figure>
+      <GlassStage className={s.glass} drink={drink} label={label} />
+
+      <div className={s.order}>
+        <OrderBuilder order={order} onChange={setOrder} />
+      </div>
 
       <p className={`hand ${s.hint}`} aria-hidden="true">
         go on, tilt it
