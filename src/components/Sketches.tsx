@@ -120,6 +120,66 @@ export const Cat = (p: { className?: string }) => (
   </Sketch>
 )
 
+export const Programme = (p: { className?: string }) => (
+  <Sketch {...p}>
+    <path d="M20 22l40 6v76l-40-6z" />
+    <path d="M60 28l40-6v76l-40 6z" />
+    <path d="M28 40l24 3M28 48l18 2M68 38l22-3M68 46l16-2" opacity="0.6" />
+    <path d="M30 64c6-8 16-8 20 0s-10 14-20 0z" />
+    <circle cx="80" cy="66" r="9" />
+  </Sketch>
+)
+
+export const Tote = (p: { className?: string }) => (
+  <Sketch {...p}>
+    <path d="M24 46h72l-6 60H30z" />
+    <path d="M42 46c0-22 36-22 36 0" />
+    <path d="M38 70h44M38 80h30" opacity="0.6" />
+    <path d="M60 56l4 8 8 1-6 6 2 8-8-4-8 4 2-8-6-6 8-1z" />
+  </Sketch>
+)
+
+export const CupSleeve = (p: { className?: string }) => (
+  <Sketch {...p}>
+    <path d="M34 30h52l-8 80H42z" />
+    <path d="M30 24h60v6H30z" />
+    <path d="M37 54h46l-3 30H40z" />
+    <path d="M46 66h28M48 74h18" opacity="0.6" />
+    <path d="M52 16c-3-5 3-8 0-12M66 16c-3-5 3-8 0-12" opacity="0.5" />
+  </Sketch>
+)
+
+export const MenuBoard = (p: { className?: string }) => (
+  <Sketch {...p}>
+    <path d="M18 18h84v66H18z" />
+    <path d="M28 30h36M28 40h28M28 50h32M28 60h24M28 70h30" opacity="0.6" />
+    <path d="M84 30h8M84 40h8M84 50h8M84 60h8M84 70h8" opacity="0.6" />
+    <path d="M40 84l-8 24M80 84l8 24" />
+  </Sketch>
+)
+
+// James, in one wobbly red line. Placeholder until the real portrait (plan §9 E).
+export const Portrait = (p: { className?: string }) => (
+  <Sketch {...p} view="0 0 200 260">
+    <path d="M62 92c-6-40 18-62 44-60 30 2 46 26 38 62" />
+    <path d="M58 70c8-22 22-30 40-28M80 46c10-14 30-16 44-6M104 40c14-8 30-2 36 12M66 58c-6-12 0-24 12-30" />
+    <path d="M62 92c0 34 18 58 42 58s40-24 40-58" />
+    <path d="M58 96c-8 0-8 16 2 16M146 96c8 0 8 16-2 16" />
+    <circle cx="86" cy="96" r="13" />
+    <circle cx="122" cy="96" r="13" />
+    <path d="M99 95c2-2 8-2 10 0M73 94l-12-3M135 94l10-3" />
+    <path d="M104 104c-2 8-4 14 2 16" />
+    <path d="M90 128c8 6 20 6 28-2" />
+    <path d="M88 148l-4 18M120 148l4 18" />
+    <path d="M30 258c2-48 22-82 58-92 10 8 22 8 32 0 36 10 52 44 54 92" />
+    <path d="M118 214c-2 12 0 24 6 30h30c6-6 8-18 6-30z" />
+    <path d="M160 222c10 0 12 14 0 16" />
+    <path d="M116 214c10 4 34 4 46 0" />
+    <path d="M110 244c-8-6-10-20-2-28 6-4 12 0 12 6" />
+    <path d="M136 206c-3-6 3-9 0-14M148 206c-3-6 3-9 0-14" opacity="0.6" />
+  </Sketch>
+)
+
 // A wobbly hand-drawn ring. Deterministic per seed, so it doesn't change between renders.
 export function handCircle(seed: number, r = 44, c = 50) {
   let s = seed * 9301 + 49297

@@ -9,6 +9,18 @@
   pointer-events: none;
 }
 .header > * { pointer-events: auto; }
+/* soft paper strip so the folio stays readable over whatever scrolls under it */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -18px;
+  z-index: -1;
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask: linear-gradient(#000 55%, transparent);
+  -webkit-mask: linear-gradient(#000 55%, transparent);
+}
 
 .folio { display: flex; gap: 0.6em; align-items: baseline; }
 .name { font-weight: 700; text-decoration: none; }

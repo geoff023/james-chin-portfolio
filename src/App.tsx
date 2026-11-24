@@ -3,7 +3,9 @@ import { Backdrop } from './components/Backdrop'
 import { Header } from './components/Header'
 import { currentIssue, type Issue } from './data/issues'
 import type { Order } from './data/order'
+import { Commissions } from './sections/Commissions'
 import { Cover } from './sections/Cover'
+import { Masthead } from './sections/Masthead'
 import { Numbers } from './sections/Numbers'
 import { Process } from './sections/Process'
 import { Shelf } from './sections/Shelf'
@@ -35,6 +37,8 @@ export function App() {
         <Statement />
         <Numbers />
         <Process />
+        <Commissions />
+        <Masthead />
       </main>
     </>
   )
