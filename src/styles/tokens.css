@@ -1,0 +1,38 @@
+:root {
+  /* riso ink palette */
+  --paper: #f5f0e6;
+  --paper-shade: #eae3d4;
+  --ink: #1d1a17;
+  --ink-soft: #5c554d;
+  --riso-red: #e5432f;
+  --riso-blue: #7faedb;
+  --riso-yellow: #f5cb4c;
+  --riso-green: #8fbf7f;
+  --issue-accent: #f2a7b5; /* overwritten per active issue */
+  --hairline: color-mix(in srgb, var(--ink) 22%, transparent);
+
+  /* type */
+  --serif: 'Instrument Serif', 'Bodoni Moda', Georgia, serif;
+  --script: 'Pinyon Script', cursive;
+  --sans: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --hand: 'Nanum Pen Script', 'Comic Sans MS', cursive;
+
+  /* scale: huge next to tiny, few in between */
+  --step-label: 0.75rem;   /* 12px labels */
+  --step-0: clamp(0.94rem, 0.9rem + 0.2vw, 1.06rem); /* 15–17px body */
+  --step-2: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  --step-4: clamp(3rem, 2rem + 5vw, 6rem);
+  --step-wordmark: clamp(4.5rem, 18vw, 17rem);
+
+  /* layout */
+  --gutter: 24px;
+  --edge: clamp(16px, 4vw, 56px);
+  --section-pad: clamp(6rem, 12vw, 12rem);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 767px) {
+  :root { --gutter: 16px; }
+}

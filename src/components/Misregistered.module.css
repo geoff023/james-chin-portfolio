@@ -1,0 +1,17 @@
+.wrap {
+  position: relative;
+  display: inline-block;
+  --offset: 2px;
+}
+.ink { position: relative; display: block; }
+.red {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: var(--riso-red);
+  opacity: 0.85;
+  transform: translate(var(--offset), calc(var(--offset) * -0.5));
+  transition: transform 0.5s var(--ease-out);
+  user-select: none;
+}
+.wrap:hover { --offset: 5px; }

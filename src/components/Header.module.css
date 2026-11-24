@@ -1,0 +1,104 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 18px var(--edge);
+  pointer-events: none;
+}
+.header > * { pointer-events: auto; }
+
+.folio { display: flex; gap: 0.6em; align-items: baseline; }
+.name { font-weight: 700; text-decoration: none; }
+.sep { color: var(--ink-soft); }
+.page {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  animation: tick 0.45s var(--ease-out);
+}
+@keyframes tick {
+  from { transform: translateY(60%); opacity: 0; }
+}
+
+.toggle {
+  position: relative;
+  padding: 4px 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-out);
+}
+.toggle:hover::after, .toggle:focus-visible::after { transform: scaleX(1); }
+
+/* Contents page */
+.contents {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+.contents::backdrop { background: transparent; }
+.contents[open] { animation: turn 0.5s var(--ease-out); }
+@keyframes turn {
+  from { transform: translateY(-3%); opacity: 0; }
+}
+
+.sheet {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 18px var(--edge) 48px;
+}
+.sheetHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 12px;
+}
+.contentsTitle {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--step-4);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.list { list-style: none; margin: 0; padding: 0; }
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: clamp(10px, 1.6vw, 18px) 0;
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: var(--step-2);
+  line-height: 1.1;
+}
+.rowTitle { transition: transform 0.35s var(--ease-out); }
+.row:hover .rowTitle { transform: translateX(10px); }
+.row:hover .rowPage { color: var(--riso-red); }
+.leader {
+  flex: 1;
+  border-bottom: 2px dotted var(--ink-soft);
+  transform: translateY(-0.25em);
+}
+.rowPage { font-variant-numeric: tabular-nums; }
+
+.note { margin-top: 32px; transform: rotate(-3deg); }
+
+@media (max-width: 520px) {
+  .issue { display: none; }
+}
