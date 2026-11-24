@@ -172,11 +172,11 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
     const pulse = Math.sin(s.t * Math.PI * 2 * 1.3)
     u.uWobble.value.set(s.wobbleAmp.x * pulse, s.wobbleAmp.y * pulse)
 
-    // drain as the page is read
+    // drain as the page is read: empty by the footer, refills on the way back up
     const max = document.documentElement.scrollHeight - innerHeight
     const read = max > innerHeight * 0.5 ? Math.min(scrollY / max, 1) : 0
     const k = 1 - Math.exp(-dt * 3)
-    s.fill += (drink.fill * (1 - 0.85 * read) - s.fill) * k
+    s.fill += (drink.fill * (1 - 0.96 * read) - s.fill) * k
     s.foamH += (drink.foamH - s.foamH) * k
     s.milkOn += ((drink.milk ? 1 : 0) - s.milkOn) * k
     s.ice += ((drink.ice ? 1 : 0) - s.ice) * k

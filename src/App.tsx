@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Backdrop } from './components/Backdrop'
+import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { currentIssue, type Issue } from './data/issues'
 import type { Order } from './data/order'
 import { Commissions } from './sections/Commissions'
 import { Cover } from './sections/Cover'
+import { Letters } from './sections/Letters'
 import { Masthead } from './sections/Masthead'
 import { Numbers } from './sections/Numbers'
 import { Process } from './sections/Process'
@@ -39,7 +41,9 @@ export function App() {
         <Process />
         <Commissions />
         <Masthead />
+        <Letters />
       </main>
+      <Footer />
     </>
   )
 }
