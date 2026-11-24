@@ -4,7 +4,8 @@
   --paper-shade: #eae3d4;
   --ink: #1d1a17;
   --ink-soft: #5c554d;
-  --riso-red: #e5432f;
+  --riso-red: #e5432f;     /* line art, large type only */
+  --riso-red-ink: #a82c1a; /* small red text: 6.1:1 on paper */
   --riso-blue: #7faedb;
   --riso-yellow: #f5cb4c;
   --riso-green: #8fbf7f;

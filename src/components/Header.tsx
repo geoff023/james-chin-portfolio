@@ -55,7 +55,7 @@ export function Header() {
             <button className={`label ${s.toggle}`} onClick={() => setOpen(false)}>Close</button>
           </div>
           <ol className={s.list}>
-            {sections.map((x) => (
+            {sections.filter((x) => x.contents).map((x) => (
               <li key={x.id}>
                 <a href={`#${x.id}`} onClick={() => setOpen(false)} className={s.row}>
                   <span className={s.rowTitle}>{x.title}</span>

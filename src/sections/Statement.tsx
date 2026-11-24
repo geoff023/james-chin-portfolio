@@ -1,10 +1,16 @@
+import { GlossaryTerm } from '../components/GlossaryTerm'
 import { KopiCup, MagStack } from '../components/Sketches'
 import s from './Statement.module.css'
 
 // Manifesto (staggered serif lines) + the wide statement band with sketch "pills" in the line.
 export function Statement() {
   return (
-    <section className={s.statement} aria-label="What Kurang Manis is about">
+    <section id="statement" className={s.statement} aria-label="What Kurang Manis is about">
+      <div className={`label ${s.rule}`}>
+        <span>— On sugar</span>
+        <span>The magazine’s one rule</span>
+      </div>
+
       <div className={s.manifesto}>
         <p className={s.lines}>
           <span className={s.l1}>Ordering a drink is a small act</span>
@@ -13,8 +19,8 @@ export function Statement() {
           <span className={s.l4}>More honest.</span>
         </p>
         <p className={s.aside}>
-          It’s how Malaysians order: <i>kurang manis</i>, less sugar, please. It became the magazine’s
-          one editorial rule. Warm, a bit dry, never sugary.
+          It’s how Malaysians order: <GlossaryTerm word="kurang manis" />, less sugar, please. It
+          became the magazine’s one editorial rule. Warm, a bit dry, never sugary.
         </p>
       </div>
 

@@ -50,6 +50,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                   <span className="label">No. {it.no} · {it.drink}</span>
                   <span className={s.cardTitle}>{it.title}</span>
                   <span className={s.cardLine}>{it.line}</span>
+                  {!it.featured && <span className={s.soldNote}>Sold out. Ask your kopitiam uncle.</span>}
                 </span>
                 {!it.featured && <span className={s.stamp} aria-hidden="true">Sold out</span>}
                 {pressed && <span className={`hand ${s.counter}`} aria-hidden="true">on the counter</span>}

@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react'
-import { defaultOrder, glossary, orderName, type Order } from '../data/order'
+import { glossary } from '../data/glossary'
+import { defaultOrder, orderName, type Order } from '../data/order'
 import s from './OrderBuilder.module.css'
 
 type Chip = { label: string; on: (o: Order) => boolean; set: (o: Order) => Order }
@@ -66,7 +67,7 @@ export function OrderBuilder({ order, onChange }: { order: Order | null; onChang
         ))}
       </div>
       <p id="order-gloss" className={s.gloss} aria-live="polite">
-        {hint ? <><b>{hint}</b>: {glossary[hint]}</> : 'Tap the code. Kopitiam uncles speak it fluently.'}
+        {hint ? <><b>{hint}</b>: {glossary[hint]?.meaning}</> : 'Tap the code. Kopitiam uncles speak it fluently.'}
       </p>
 
       {name && (

@@ -145,6 +145,9 @@
   transition: grid-template-rows 0.6s var(--ease-out);
 }
 .open .panel { grid-template-rows: 1fr; }
+/* clip only while collapsing/expanding, so glossary cards inside an open row aren't cut off */
+.open .panelInner { animation: unclip 0s 0.6s forwards; }
+@keyframes unclip { to { overflow: visible; } }
 .panelInner {
   min-height: 0;
   overflow: hidden;
@@ -188,6 +191,26 @@
   bottom: 1.5rem;
   color: var(--ink-soft);
 }
+
+/* stools and the shop cat, standing under the list */
+.scatter {
+  position: relative;
+  height: clamp(110px, 12vw, 170px);
+  margin-top: 1.5rem;
+  color: var(--riso-red);
+  pointer-events: none;
+}
+.stools, .cat { position: absolute; bottom: 0; }
+.stools { right: 14%; width: clamp(80px, 9vw, 130px); }
+.stools + .stools { right: calc(14% + clamp(70px, 8vw, 115px)); transform: scaleX(-1) rotate(-3deg); }
+.cat { right: calc(14% + clamp(14px, 1.6vw, 24px)); bottom: clamp(56px, 6.2vw, 92px); width: clamp(56px, 6vw, 86px); }
+.scatter path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 1.6s var(--ease-out);
+}
+.scatter.seen path { stroke-dashoffset: 0; }
+.scatter.seen .cat path { transition-delay: 0.9s; }
 
 @media (max-width: 1023px) {
   .title { grid-column: 1 / -1; }

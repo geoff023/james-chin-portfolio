@@ -6,6 +6,10 @@ import type { Drink } from '../data/order'
 
 const H = 3 // glass height, world units; the glass is centred on the origin
 
+// plan §6 guardrails: cheaper glass on phones, no ripples or sloshing under reduced motion
+const lowPower = matchMedia('(pointer: coarse)').matches || innerWidth < 768
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches
+
 // kopitiam tumbler: narrow foot, slight flare, thick base. Outer wall up, inner wall back down.
 const glassProfile = [
   [0, -1.5], [0.72, -1.5], [0.79, -1.44], [1.0, 1.48], [0.985, 1.52], [0.955, 1.5], [0.75, -1.22], [0, -1.22],
@@ -33,6 +37,7 @@ const liquidVert = /* glsl */ `
 const liquidFrag = /* glsl */ `
   uniform float uSurface;
   uniform float uTime;
+  uniform float uMotion;
   uniform vec2 uWobble;
   uniform vec3 uLiquid;
   uniform vec3 uMilk;
@@ -44,7 +49,7 @@ const liquidFrag = /* glsl */ `
   varying float vLocalY;
 
   void main() {
-    float ripple = 0.012 * sin(vWorld.x * 9.0 + uTime * 2.1) * sin(vWorld.z * 8.0 + uTime * 1.7);
+    float ripple = uMotion * 0.012 * sin(vWorld.x * 9.0 + uTime * 2.1) * sin(vWorld.z * 8.0 + uTime * 1.7);
     float surf = uSurface + uWobble.x * vWorld.x + uWobble.y * vWorld.z + ripple;
     if (vWorld.y > surf) discard;
     float depth = surf - vWorld.y;
@@ -101,6 +106,7 @@ function makeLiquidMaterial(d: Drink) {
     uniforms: {
       uSurface: { value: -H / 2 + d.fill * H },
       uTime: { value: 0 },
+      uMotion: { value: calm ? 0 : 1 },
       uWobble: { value: new THREE.Vector2() },
       uLiquid: { value: new THREE.Color(d.liquid) },
       uMilk: { value: new THREE.Color(d.milk ?? d.liquid) },
@@ -160,8 +166,9 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
     // liquid wobble: kicked by angular velocity, decays, oscillates
     const avx = (s.rot.x - tmp.prev.x) / dt
     const avy = (s.rot.y - tmp.prev.y) / dt
-    s.wobbleAmp.x = THREE.MathUtils.clamp(s.wobbleAmp.x * (1 - dt * 1.4) - avy * 0.014, -0.4, 0.4)
-    s.wobbleAmp.y = THREE.MathUtils.clamp(s.wobbleAmp.y * (1 - dt * 1.4) + avx * 0.014, -0.4, 0.4)
+    const kick = calm ? 0 : 0.014
+    s.wobbleAmp.x = THREE.MathUtils.clamp(s.wobbleAmp.x * (1 - dt * 1.4) - avy * kick, -0.4, 0.4)
+    s.wobbleAmp.y = THREE.MathUtils.clamp(s.wobbleAmp.y * (1 - dt * 1.4) + avx * kick, -0.4, 0.4)
     const pulse = Math.sin(s.t * Math.PI * 2 * 1.3)
     u.uWobble.value.set(s.wobbleAmp.x * pulse, s.wobbleAmp.y * pulse)
 
@@ -183,8 +190,8 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
 
     // ice floats: ~85% under the surface, bobbing; shrinks away when not peng
     ice.current!.children.forEach((cube, i) => {
-      cube.position.y = Math.max(surf - 0.12 - i * 0.05 + Math.sin(s.t * 1.3 + i * 2.1) * 0.025, -0.95)
-      cube.rotation.y += dt * 0.05 * (i % 2 ? 1 : -1)
+      cube.position.y = Math.max(surf - 0.12 - i * 0.05 + (calm ? 0 : Math.sin(s.t * 1.3 + i * 2.1) * 0.025), -0.95)
+      if (!calm) cube.rotation.y += dt * 0.05 * (i % 2 ? 1 : -1)
       cube.scale.setScalar(Math.max(s.ice, 0.001))
     })
   })
@@ -210,8 +217,8 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
         <latheGeometry args={[glassProfile, 96]} />
         <MeshTransmissionMaterial
           background={new THREE.Color('#efe3e1')}
-          samples={6}
-          resolution={512}
+          samples={lowPower ? 3 : 6}
+          resolution={lowPower ? 256 : 512}
           thickness={0.18}
           roughness={0.04}
           ior={1.5}
@@ -292,7 +299,7 @@ export default function GlassScene({ drink, label }: { drink: Drink; label: stri
     >
       <Canvas
         frameloop={inView ? 'always' : 'never'}
-        dpr={[1, 1.75]}
+        dpr={lowPower ? [1, 1.5] : [1, 1.75]}
         camera={{ position: [0, 1.4, 13.8], fov: 30 }}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ camera }) => camera.lookAt(0, 0.3, 0)}

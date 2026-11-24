@@ -44,16 +44,3 @@ export function drinkFor(o: Order): Drink {
     fill: o.peng ? 0.82 : 0.76,
   }
 }
-
-export const glossary: Record<string, string> = {
-  Kopi: 'coffee, with condensed milk unless you say otherwise',
-  Teh: 'tea, with condensed milk unless you say otherwise',
-  Susu: 'condensed milk. The default. Sits at the bottom until stirred',
-  O: '“oh”: no milk at all',
-  C: '“see”: evaporated milk, a little sugar',
-  Biasa: 'normal sweet, which is very sweet',
-  'Siew Dai': 'less sweet. Hokkien. Kurang manis, basically',
-  Kosong: 'empty: no sugar',
-  Gau: 'thick, strong. More powder, less water',
-  Peng: 'iced',
-}

@@ -1,0 +1,56 @@
+.term {
+  position: relative;
+  text-decoration: underline dotted var(--riso-red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+.term > i { font-style: italic; }
+
+.card {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 10px;
+  width: max-content;
+  max-width: 250px;
+  padding: 12px 14px;
+  background: #fffdf7;
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(29, 26, 23, 0.08), 0 14px 28px -16px rgba(29, 26, 23, 0.6);
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 6px) rotate(-1deg);
+  transition: opacity 0.25s, transform 0.35s var(--ease-out), visibility 0s 0.35s;
+  pointer-events: none;
+}
+/* bridge the gap so the pointer can move onto the card without it vanishing */
+.card::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 12px; }
+.term:hover .card, .term:focus-visible .card {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0) rotate(-1deg);
+  transition: opacity 0.25s, transform 0.35s var(--ease-out);
+}
+
+.sketch { grid-row: 1 / span 3; width: 34px; color: var(--riso-red); }
+.word { font-family: var(--serif); font-size: 1.25rem; line-height: 1.1; }
+.say {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.meaning { grid-column: 2; margin-top: 4px; color: var(--ink-soft); }

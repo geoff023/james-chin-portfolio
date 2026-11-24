@@ -1,4 +1,5 @@
 import { Misregistered } from '../components/Misregistered'
+import { GlossaryTerm } from '../components/GlossaryTerm'
 import { OrderBuilder } from '../components/OrderBuilder'
 import { currentIssue, type Issue } from '../data/issues'
 import { drinkFor, orderName, type Order } from '../data/order'
@@ -30,7 +31,7 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
       <div className={s.intro}>
         <p>
           Founder and creative director of <em>Kurang Manis</em>, a print quarterly about what
-          Southeast Asia drinks. One drink per issue, three thousand copies, read on kopitiam tables.
+          Southeast Asia drinks. One drink per issue, three thousand copies, read on <GlossaryTerm word="kopitiam" /> tables.
         </p>
         <p>Also makes menus, identities and festival programmes for people who sell drinks.</p>
         <a href="#letters" className={`label ${s.cta}`}>Taking commissions for 2027 ↘</a>

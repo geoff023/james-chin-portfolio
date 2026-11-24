@@ -3,6 +3,16 @@
   padding: clamp(4rem, 8vw, 8rem) var(--edge) var(--section-pad);
 }
 
+.rule {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 10px;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  border-top: 1px solid var(--hairline);
+  color: var(--ink-soft);
+}
+
 /* Nua: big serif lines stepping right, small sans paragraph tucked beside */
 .manifesto {
   display: grid;

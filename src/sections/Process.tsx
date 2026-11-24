@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState, type ComponentType } from 'react'
+import { useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react'
+import { GlossaryTerm } from '../components/GlossaryTerm'
 import { Misregistered } from '../components/Misregistered'
 import {
-  Bubbles, FilmCamera, GridPage, handCircle, Kettle, MapPin, Myvi, TwoCups, useInView,
+  Bubbles, Cat, FilmCamera, GridPage, handCircle, Kettle, MapPin, Myvi, Stools, TwoCups, useInView,
 } from '../components/Sketches'
 import s from './Process.module.css'
 
-const steps: { title: string; short: string; body: string; note: string; Art: ComponentType<{ className?: string }> }[] = [
+const steps: { title: string; short: string; body: ReactNode; note: string; Art: ComponentType<{ className?: string }> }[] = [
   {
     title: 'The Drink', short: 'Pick one. Argue for a month.',
     body: 'Four of us, one table, a month of arguing about which drink gets the next issue. The argument is the research: whoever loses has to find out why they were wrong.',
@@ -18,7 +19,7 @@ const steps: { title: string; short: string; body: string; note: string; Art: Co
   },
   {
     title: 'Interviews', short: 'Owners, regulars, the uncle with opinions.',
-    body: 'Stall owners, the regulars at 6am, and the one uncle at every shop who has opinions. We record everything and print the parts nobody would put on a menu.',
+    body: <>Stall owners, the regulars at 6am, and the one uncle at every <GlossaryTerm word="kopitiam">shop</GlossaryTerm> who has opinions. We record everything and print the parts nobody would put on a menu.</>,
     note: 'mostly the uncle', Art: Bubbles,
   },
   {
@@ -33,7 +34,7 @@ const steps: { title: string; short: string; body: string; note: string; Art: Co
   },
   {
     title: 'Press', short: 'Riso and offset. Folded by hand.',
-    body: 'Covers on the riso, insides offset at a print shop in Ipoh. Folded by hand on the shop floor and delivered by Myvi to every stockist we can drive to.',
+    body: <>Covers on the riso, insides offset at a print shop in Ipoh. Folded by hand on the shop floor and delivered by <GlossaryTerm word="Myvi" /> to every stockist we can drive to.</>,
     note: 'the boot fits 400 copies', Art: Myvi,
   },
 ]
@@ -41,6 +42,7 @@ const steps: { title: string; short: string; body: string; note: string; Art: Co
 export function Process() {
   const [open, setOpen] = useState(0)
   const [listRef, seen] = useInView<HTMLOListElement>()
+  const [scatterRef, scatterSeen] = useInView<HTMLDivElement>()
   const section = useRef<HTMLElement>(null)
 
   // the dashed path draws as the list scrolls past (CSS reads --p)
@@ -89,48 +91,53 @@ export function Process() {
       </div>
 
       <div className={s.listWrap}>
-      <svg className={s.path} viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M20 0 C34 120 6 200 20 330 S34 520 18 660 S8 860 20 1000" />
-      </svg>
-      <ol ref={listRef} className={`${s.list} ${seen ? s.seen : ''}`}>
-
-        {steps.map((st, i) => {
-          const isOpen = open === i
-          const id = `step-${i}`
-          return (
-            <li key={st.title} className={`${s.row} ${isOpen ? s.open : ''}`}>
-              <h3 className={s.rowHead}>
-                <button
-                  type="button"
-                  className={s.toggle}
-                  aria-expanded={isOpen}
-                  aria-controls={id}
-                  onClick={() => setOpen(isOpen ? -1 : i)}
-                >
-                  <span className={s.num} aria-hidden="true">
-                    <svg viewBox="0 0 100 100">
-                      <path d={handCircle(i + 3)} pathLength={1} style={{ transitionDelay: `${0.15 * i}s` }} />
-                    </svg>
-                    {i + 1}
-                  </span>
-                  <span className={s.stepTitle}>{st.title}</span>
-                  <span className={s.short}>{st.short}</span>
-                  <span className={s.plus} aria-hidden="true" />
-                </button>
-              </h3>
-              <div id={id} className={s.panel} role="region" aria-label={st.title} inert={!isOpen}>
-                <div className={s.panelInner}>
-                  <div className={s.disc} aria-hidden="true">
-                    <st.Art className={s.art} />
+        <svg className={s.path} viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M20 0 C34 120 6 200 20 330 S34 520 18 660 S8 860 20 1000" />
+        </svg>
+        <ol ref={listRef} className={`${s.list} ${seen ? s.seen : ''}`}>
+          {steps.map((st, i) => {
+            const isOpen = open === i
+            const id = `step-${i}`
+            return (
+              <li key={st.title} className={`${s.row} ${isOpen ? s.open : ''}`}>
+                <h3 className={s.rowHead}>
+                  <button
+                    type="button"
+                    className={s.toggle}
+                    aria-expanded={isOpen}
+                    aria-controls={id}
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                  >
+                    <span className={s.num} aria-hidden="true">
+                      <svg viewBox="0 0 100 100">
+                        <path d={handCircle(i + 3)} pathLength={1} style={{ transitionDelay: `${0.15 * i}s` }} />
+                      </svg>
+                      {i + 1}
+                    </span>
+                    <span className={s.stepTitle}>{st.title}</span>
+                    <span className={s.short}>{st.short}</span>
+                    <span className={s.plus} aria-hidden="true" />
+                  </button>
+                </h3>
+                <div id={id} className={s.panel} role="region" aria-label={st.title} inert={!isOpen}>
+                  <div className={s.panelInner}>
+                    <div className={s.disc} aria-hidden="true">
+                      <st.Art className={s.art} />
+                    </div>
+                    <p className={s.body}>{st.body}</p>
+                    <p className={`hand ${s.note}`} aria-hidden="true">{st.note}</p>
                   </div>
-                  <p className={s.body}>{st.body}</p>
-                  <p className={`hand ${s.note}`} aria-hidden="true">{st.note}</p>
                 </div>
-              </div>
-            </li>
-          )
-        })}
-      </ol>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+
+      <div ref={scatterRef} className={`${s.scatter} ${scatterSeen ? s.seen : ''}`} aria-hidden="true">
+        <Stools className={s.stools} />
+        <Stools className={s.stools} />
+        <Cat className={s.cat} />
       </div>
 
       <span className={`label ${s.folio}`} aria-hidden="true">16</span>

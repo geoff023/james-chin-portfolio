@@ -122,6 +122,11 @@
   line-height: 1.4;
   color: var(--ink-soft);
 }
+.soldNote {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--riso-red-ink);
+}
 
 /* hover / focus: frost clears, cover lifts, title slides up */
 .card:hover, .card:focus-visible { transform: translateY(-6px); box-shadow: 0 1px 0 rgba(29, 26, 23, 0.06), 0 28px 40px -26px rgba(29, 26, 23, 0.7); }
@@ -152,9 +157,9 @@
   top: 14px;
   right: 12px;
   padding: 3px 8px 2px;
-  border: 2px solid var(--riso-red);
+  border: 2px solid var(--riso-red-ink);
   border-radius: 4px;
-  color: var(--riso-red);
+  color: var(--riso-red-ink);
   font-size: 0.6875rem;
   font-weight: 700;
   font-stretch: 75%;

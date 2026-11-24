@@ -106,12 +106,14 @@ export const issues: Issue[] = [
 
 export const currentIssue = issues[0]
 
-// home page sections, in reading order; drives the folio + contents page
+// home page sections, in reading order; drives the folio. `contents: false` = folio only.
 export const sections = [
-  { id: 'cover', title: 'Cover', page: '01' },
-  { id: 'shelf', title: 'The Shelf', page: '08' },
-  { id: 'process', title: 'How an Issue Gets Made', page: '16' },
-  { id: 'commissions', title: 'Commissions', page: '24' },
-  { id: 'masthead', title: 'Masthead', page: '30' },
-  { id: 'letters', title: 'Letters to the Editor', page: '34' },
+  { id: 'cover', title: 'Cover', page: '01', contents: true },
+  { id: 'shelf', title: 'The Shelf', page: '08', contents: true },
+  { id: 'statement', title: 'On Sugar', page: '12', contents: false },
+  { id: 'numbers', title: 'By the Numbers', page: '14', contents: false },
+  { id: 'process', title: 'How an Issue Gets Made', page: '16', contents: true },
+  { id: 'commissions', title: 'Commissions', page: '24', contents: true },
+  { id: 'masthead', title: 'Masthead', page: '30', contents: true },
+  { id: 'letters', title: 'Letters to the Editor', page: '34', contents: true },
 ] as const
