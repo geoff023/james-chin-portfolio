@@ -4,7 +4,10 @@ import { Header } from './components/Header'
 import { currentIssue, type Issue } from './data/issues'
 import type { Order } from './data/order'
 import { Cover } from './sections/Cover'
+import { Numbers } from './sections/Numbers'
+import { Process } from './sections/Process'
 import { Shelf } from './sections/Shelf'
+import { Statement } from './sections/Statement'
 
 // ponytail: single page for now; React Router arrives with the issue pages (phase 7)
 export function App() {
@@ -29,6 +32,9 @@ export function App() {
             setOrder(null)
           }}
         />
+        <Statement />
+        <Numbers />
+        <Process />
       </main>
     </>
   )
