@@ -12,10 +12,20 @@ const hasWebGL = () => {
   }
 }
 
-// SVG poster paints first; the 3D glass loads after and fades in over it.
+// SVG poster paints first. The 3D glass (three.js, ~270 KB gzip, seconds of CPU on a phone) only loads
+// once the visitor does something: moves the mouse, touches, scrolls or presses a key.
 export function GlassStage({ drink, label, className }: { drink: Drink; label: string; className?: string }) {
   const [ready, setReady] = useState(false)
-  useEffect(() => setReady(hasWebGL()), []) // effects run after first paint
+  useEffect(() => {
+    if (!hasWebGL()) return
+    const events = ['pointermove', 'pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'] as const
+    const go = () => {
+      events.forEach((e) => removeEventListener(e, go))
+      setReady(true)
+    }
+    events.forEach((e) => addEventListener(e, go, { passive: true }))
+    return () => events.forEach((e) => removeEventListener(e, go))
+  }, [])
 
   const poster = (
     <div role="img" aria-label={label} style={{ height: '100%', display: 'grid', placeItems: 'center' }}>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { GlossaryTerm } from '../components/GlossaryTerm'
 import { Misregistered } from '../components/Misregistered'
-import { Portrait } from '../components/Sketches'
 import s from './Masthead.module.css'
 
 const drinking = ['Kopi C kosong', 'Teh O ais limau', 'Barley ais, no sugar', 'Kopi O gau', 'Bandung, for research']
@@ -70,7 +69,15 @@ export function Masthead() {
         </div>
 
         <figure className={s.portrait}>
-          <Portrait className={s.portraitArt} />
+          <img
+            src="/illustrations/james.webp"
+            alt="Red pencil line drawing of James, in round glasses with a pen tucked behind his ear, reading a proof."
+            width={900}
+            height={834}
+            loading="lazy"
+            decoding="async"
+            className={s.portraitArt}
+          />
           <figcaption className={s.drinking}>
             <span className="label">Currently drinking</span>
             <span key={n} className={`hand ${s.drink}`}>{drinking[n]}</span>

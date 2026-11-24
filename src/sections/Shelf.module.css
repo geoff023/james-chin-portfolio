@@ -166,8 +166,8 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transform: rotate(8deg);
-  opacity: 0.85;
-  mix-blend-mode: multiply;
+  /* paper patch keeps the 11px stamp at AA even on the dark Kopi O / Milo covers */
+  background: color-mix(in srgb, var(--paper) 85%, transparent);
 }
 
 .caption {

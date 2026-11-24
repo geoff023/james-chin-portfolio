@@ -164,7 +164,7 @@
   gap: clamp(1.5rem, 4vw, 4rem);
   align-items: end;
   padding: clamp(24px, 3vw, 40px);
-  background: color-mix(in srgb, var(--tint) 22%, var(--paper-shade));
+  background: color-mix(in srgb, var(--tint) 15%, var(--paper-shade));
 }
 .factHead {
   font-family: var(--sans);

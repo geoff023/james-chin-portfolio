@@ -40,18 +40,19 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                 className={s.card}
                 style={{ '--tint': it.accent } as CSSProperties}
                 aria-pressed={pressed}
-                aria-label={`Issue ${it.no}, ${it.drink}: ${it.title}. ${it.featured ? 'In print' : 'Sold out'}. Pour it into the glass.`}
                 onClick={() => onPick(it)}
               >
                 <span className={s.art} aria-hidden="true">
                   <GlassPoster liquid={it.glass.liquid} ice={it.glass.ice} />
                 </span>
                 <span className={s.frost} aria-hidden="true" />
-                <span className={s.meta} aria-hidden="true">
+                {/* the visible text is the button's name (WCAG 2.5.3), plus a hidden hint */}
+                <span className={s.meta}>
                   <span className="label">No. {it.no} · {it.drink}</span>
                   <span className={s.cardTitle}>{it.title}</span>
                   <span className={s.cardLine}>{it.line}</span>
                   {!it.featured && <span className={s.soldNote}>Sold out. Ask your kopitiam uncle.</span>}
+                  <span className="visually-hidden">{it.featured ? 'In print. ' : ''}Pour it into the glass.</span>
                 </span>
                 {!it.featured && <span className={s.stamp} aria-hidden="true">Sold out</span>}
                 {pressed && <span className={`hand ${s.counter}`} aria-hidden="true">on the counter</span>}

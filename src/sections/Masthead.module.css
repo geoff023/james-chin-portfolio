@@ -56,7 +56,9 @@
   gap: 12px;
 }
 .portraitArt {
-  width: min(100%, 340px);
+  width: min(115%, 440px);
+  max-width: none;
+  height: auto;
   color: var(--riso-red);
   background: radial-gradient(closest-side, color-mix(in srgb, var(--issue-accent) 40%, transparent), transparent);
   transition: background-color 1.2s;

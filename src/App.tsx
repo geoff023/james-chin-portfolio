@@ -33,7 +33,7 @@ function Layout() {
     <>
       <Backdrop />
       <Header />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Suspense fallback={<p className="hand loading">Pulling the tea…</p>}>
           <Outlet context={{ issue, setIssue, order, setOrder } satisfies Shared} />
         </Suspense>

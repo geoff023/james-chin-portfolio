@@ -166,7 +166,7 @@
   from { opacity: 0; transform: translateY(0.35em); }
 }
 @keyframes register {
-  from { transform: none; opacity: 0; }
+  from { transform: none; } /* transform only: an opacity fade here delays the LCP paint */
 }
 @keyframes settle {
   from { opacity: 0; transform: translateY(40px) rotate(8deg); }

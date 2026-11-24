@@ -23,7 +23,7 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
 }
-.empty { font-size: 1.6rem; margin-top: 0.5rem; transform: rotate(-2deg); justify-self: start; color: var(--riso-red-ink); }
+.empty { font-size: 1.6rem; margin-top: 0.5rem; transform: rotate(-2deg); justify-self: start; color: var(--ink); } /* dark issue tints sink red below AA */
 
 /* stamp button that leans toward you */
 .another {
@@ -54,7 +54,7 @@
 .head { margin: 0 0 10px; font-weight: 700; }
 .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .links a { text-decoration-color: var(--riso-red-ink); text-underline-offset: 3px; }
-.links a:hover { color: var(--riso-red-ink); }
+.links a:hover { text-decoration-thickness: 2px; }
 
 /* red line objects standing on the bottom edge, drawn in when the footer arrives */
 .objects {

@@ -60,7 +60,7 @@ export function Process() {
       el.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(3))
     }
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
-    update()
+    onScroll() // first measure on the next frame, not inside React's commit (avoids a forced reflow)
     addEventListener('scroll', onScroll, { passive: true })
     addEventListener('resize', onScroll)
     return () => {
