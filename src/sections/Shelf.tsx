@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
 import { Misregistered } from '../components/Misregistered'
 import { issues, type Issue } from '../data/issues'
 import { GlassPoster } from './GlassPoster'
@@ -9,7 +10,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
   const inPrint = issues.filter((i) => i.featured).length
 
   return (
-    <section id="shelf" className={s.shelf} aria-labelledby="shelf-title">
+    <section id="shelf" data-folio="08" className={s.shelf} aria-labelledby="shelf-title">
       <div className={`label ${s.rule}`}>
         <span>02 — The Shelf</span>
         <span>{issues.length} issues · {inPrint} in print</span>
@@ -55,9 +56,15 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                 {!it.featured && <span className={s.stamp} aria-hidden="true">Sold out</span>}
                 {pressed && <span className={`hand ${s.counter}`} aria-hidden="true">on the counter</span>}
               </button>
-              <p className={`label ${s.caption}`} aria-hidden="true">
-                <span>{it.no}</span>
-                <span>{it.drink}</span>
+              <p className={`label ${s.caption}`}>
+                <span aria-hidden="true">{it.no}</span>
+                {it.featured ? (
+                  <Link to={`/issues/${it.slug}`} viewTransition className={s.read}>
+                    Read issue {it.no} <span aria-hidden="true">→</span>
+                  </Link>
+                ) : (
+                  <span aria-hidden="true">{it.drink}</span>
+                )}
               </p>
             </li>
           )

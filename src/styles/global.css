@@ -67,7 +67,19 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   white-space: nowrap;
 }
 
+/* page turn between routes (View Transitions; browsers without it just swap) */
+::view-transition-old(root) { animation: 0.45s var(--ease-out) both page-under; }
+::view-transition-new(root) { animation: 0.6s var(--ease-out) both page-over; }
+@keyframes page-under { to { opacity: 0.6; transform: translateX(-6%) scale(0.98); } }
+@keyframes page-over {
+  from { transform: translateX(100%) rotate(1.5deg); box-shadow: -30px 0 60px rgba(29, 26, 23, 0.25); }
+  to { transform: none; box-shadow: none; }
+}
+
+.loading { padding: 40vh var(--edge); }
+
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

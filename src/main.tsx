@@ -7,10 +7,11 @@ import '@fontsource-variable/archivo/wdth.css'
 import '@fontsource/nanum-pen-script/latin-400.css'
 import './styles/tokens.css'
 import './styles/global.css'
-import { App } from './App'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )

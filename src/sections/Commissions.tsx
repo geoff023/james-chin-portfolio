@@ -13,7 +13,7 @@ const plates: Record<string, [ComponentType<{ className?: string }>, ComponentTy
 // Client work, each laid out as a magazine spread: plate on one page, story on the other.
 export function Commissions() {
   return (
-    <section id="commissions" className={s.commissions} aria-labelledby="commissions-title">
+    <section id="commissions" data-folio="24" className={s.commissions} aria-labelledby="commissions-title">
       <div className={`label ${s.rule}`}>
         <span>04 — Commissions</span>
         <span>For people who sell drinks</span>

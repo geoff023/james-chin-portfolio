@@ -25,7 +25,7 @@ export function Numbers() {
   const [ref, seen] = useInView<HTMLDivElement>()
 
   return (
-    <section id="numbers" className={s.numbers} aria-labelledby="numbers-title">
+    <section id="numbers" data-folio="14" className={s.numbers} aria-labelledby="numbers-title">
       <div className={s.head}>
         <h2 id="numbers-title" className={s.title}>By the numbers</h2>
         <p className={s.sub}>Since 2019, give or take a cat.</p>

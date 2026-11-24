@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { currentIssue, sections } from '../data/issues'
+import { Link, useLocation, useMatch } from 'react-router-dom'
+import { currentIssue, issues, sections } from '../data/issues'
 import s from './Header.module.css'
 
 // Running folio (page number follows the section in view) + Contents page menu.
@@ -7,24 +8,31 @@ export function Header() {
   const [page, setPage] = useState<string>(sections[0].page)
   const [open, setOpen] = useState(false)
   const dialog = useRef<HTMLDialogElement>(null)
+  const { pathname } = useLocation()
+  // on an issue page the running head names that issue
+  const slug = useMatch('/issues/:slug')?.params.slug
+  const shown = issues.find((i) => i.slug === slug) ?? currentIssue
 
+  // any element with data-folio="NN" on the current page sets the running page number
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (!e.isIntersecting) continue
-          const hit = sections.find((x) => x.id === e.target.id)
-          if (hit) setPage(hit.page)
+          if (e.isIntersecting) setPage((e.target as HTMLElement).dataset.folio!)
         }
       },
       { rootMargin: '-45% 0px -50% 0px' },
     )
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) io.observe(el)
-    })
-    return () => io.disconnect()
-  }, [])
+    // routes load lazily, so rescan whenever the page content changes (re-observing is a no-op)
+    const scan = () => document.querySelectorAll('[data-folio]').forEach((el) => io.observe(el))
+    const mo = new MutationObserver(scan)
+    mo.observe(document.getElementById('main')!, { childList: true, subtree: true })
+    scan()
+    return () => {
+      mo.disconnect()
+      io.disconnect()
+    }
+  }, [pathname])
 
   useEffect(() => {
     const d = dialog.current
@@ -37,9 +45,9 @@ export function Header() {
     <header className={s.header}>
       <a className="skip-link" href="#main">Skip to content</a>
       <p className={`label ${s.folio}`}>
-        <a href="#cover" className={s.name}>James Chin</a>
+        <Link to="/" viewTransition className={s.name}>James Chin</Link>
         <span className={s.issue}>
-          <span className={s.sep}>—</span> Kurang Manis, Issue {currentIssue.no}
+          <span className={s.sep}>—</span> Kurang Manis, Issue {shown.no}
         </span>
         <span className={s.sep}>—</span>
         <span aria-live="polite">p. <span key={page} className={s.page}>{page}</span></span>
@@ -57,11 +65,11 @@ export function Header() {
           <ol className={s.list}>
             {sections.filter((x) => x.contents).map((x) => (
               <li key={x.id}>
-                <a href={`#${x.id}`} onClick={() => setOpen(false)} className={s.row}>
+                <Link to={`/#${x.id}`} onClick={() => setOpen(false)} className={s.row}>
                   <span className={s.rowTitle}>{x.title}</span>
                   <span className={s.leader} aria-hidden="true" />
                   <span className={s.rowPage}>{x.page}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ol>

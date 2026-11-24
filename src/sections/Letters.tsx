@@ -60,7 +60,7 @@ export function Letters() {
     errors[name] && <span id={`${name}-error`} className={s.error}>{errors[name]}</span>
 
   return (
-    <section id="letters" className={s.letters} aria-labelledby="letters-title">
+    <section id="letters" data-folio="34" className={s.letters} aria-labelledby="letters-title">
       <div className={`label ${s.rule}`}>
         <span>06 — Letters to the Editor</span>
         <span>Replies within a week</span>

@@ -45,7 +45,7 @@ export function Masthead() {
   }, [])
 
   return (
-    <section id="masthead" className={s.masthead} aria-labelledby="masthead-title">
+    <section id="masthead" data-folio="30" className={s.masthead} aria-labelledby="masthead-title">
       <div className={`label ${s.rule}`}>
         <span>05 — Masthead</span>
         <span>Four people and a cat</span>

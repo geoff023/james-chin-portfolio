@@ -5,7 +5,7 @@ import s from './Statement.module.css'
 // Manifesto (staggered serif lines) + the wide statement band with sketch "pills" in the line.
 export function Statement() {
   return (
-    <section id="statement" className={s.statement} aria-label="What Kurang Manis is about">
+    <section id="statement" data-folio="12" className={s.statement} aria-label="What Kurang Manis is about">
       <div className={`label ${s.rule}`}>
         <span>— On sugar</span>
         <span>The magazine’s one rule</span>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Misregistered } from '../components/Misregistered'
 import { GlossaryTerm } from '../components/GlossaryTerm'
 import { OrderBuilder } from '../components/OrderBuilder'
@@ -14,7 +15,7 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
     : `A glass of ${issue.drink.toLowerCase()}, ${issue.drinkEn}`
 
   return (
-    <section id="cover" className={s.cover} aria-labelledby="cover-title">
+    <section id="cover" data-folio="01" className={s.cover} aria-labelledby="cover-title">
       <div className={`label ${s.dateline}`}>
         <span>Portfolio</span>
         <span>Creative direction · Editorial design · Print</span>
@@ -53,7 +54,9 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
 
       <p className={s.coverline}>
         <span className="label">Latest work · Kurang Manis, Issue {currentIssue.no}</span>
-        <Misregistered as="span" className={s.issueTitle}>{currentIssue.title}</Misregistered>
+        <Link to={`/issues/${currentIssue.slug}`} viewTransition className={s.issueLink}>
+          <Misregistered as="span" className={s.issueTitle}>{currentIssue.title}</Misregistered>
+        </Link>
         <span className={s.issueDrink}>
           {currentIssue.drink}, <i>{currentIssue.drinkEn}</i>
         </span>

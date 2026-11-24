@@ -1,0 +1,46 @@
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  padding: clamp(16px, 3vw, 32px);
+  background: color-mix(in srgb, var(--tint, var(--issue-accent)) 18%, var(--paper));
+}
+
+.stage { justify-self: center; width: min(100%, 400px); touch-action: none; cursor: grab; }
+.stage:active { cursor: grabbing; }
+.svg { width: 100%; height: auto; overflow: visible; user-select: none; }
+
+.mug { fill: none; stroke: var(--riso-red); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.tea { fill: #b9783f; }
+.foam { fill: #f1dfc2; }
+.topMug { transition: transform 0.3s var(--ease-out); }
+.stream {
+  fill: none;
+  stroke: #b9783f;
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.ruler path { stroke: var(--ink-soft); stroke-width: 1.2; }
+.ruler text { font-family: var(--sans); font-size: 10px; fill: var(--ink-soft); text-anchor: end; }
+.ruler .marker { stroke: var(--riso-red-ink); stroke-width: 2.5; }
+
+.readout { display: grid; gap: 6px; }
+.big {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 2rem + 6vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.big span { font-size: 0.35em; margin-left: 0.1em; color: var(--ink-soft); }
+.result { min-height: 7.5rem; margin-top: 1rem; display: grid; gap: 8px; align-content: start; }
+.facts { font-weight: 600; }
+.verdict { font-size: 1.8rem; color: var(--riso-red-ink); transform: rotate(-2deg); justify-self: start; }
+.reset { justify-self: start; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.hint { max-width: 32ch; color: var(--ink-soft); }
+
+@media (max-width: 767px) {
+  .wrap { grid-template-columns: 1fr; }
+}

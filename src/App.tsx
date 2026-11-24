@@ -1,21 +1,25 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { createBrowserRouter, Outlet, ScrollRestoration, useOutletContext } from 'react-router-dom'
 import { Backdrop } from './components/Backdrop'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { currentIssue, type Issue } from './data/issues'
 import type { Order } from './data/order'
-import { Commissions } from './sections/Commissions'
-import { Cover } from './sections/Cover'
-import { Letters } from './sections/Letters'
-import { Masthead } from './sections/Masthead'
-import { Numbers } from './sections/Numbers'
-import { Process } from './sections/Process'
-import { Shelf } from './sections/Shelf'
-import { Statement } from './sections/Statement'
+import { Home } from './routes/Home'
+import { NotFound } from './routes/NotFound'
 
-// ponytail: single page for now; React Router arrives with the issue pages (phase 7)
-export function App() {
-  // shared between the glass (Cover) and the Shelf; a context can wait until a third reader shows up
+const IssuePage = lazy(() => import('./routes/Issue'))
+
+// shared between the cover glass, the Shelf and the issue pages
+export type Shared = {
+  issue: Issue
+  setIssue: (i: Issue) => void
+  order: Order | null
+  setOrder: (o: Order | null) => void
+}
+export const useShared = () => useOutletContext<Shared>()
+
+function Layout() {
   const [issue, setIssue] = useState<Issue>(currentIssue)
   const [order, setOrder] = useState<Order | null>(null)
 
@@ -28,22 +32,23 @@ export function App() {
       <Backdrop />
       <Header />
       <main id="main">
-        <Cover issue={issue} order={order} onOrder={setOrder} />
-        <Shelf
-          active={order ? null : issue}
-          onPick={(i) => {
-            setIssue(i)
-            setOrder(null)
-          }}
-        />
-        <Statement />
-        <Numbers />
-        <Process />
-        <Commissions />
-        <Masthead />
-        <Letters />
+        <Suspense fallback={<p className="hand loading">Pulling the tea…</p>}>
+          <Outlet context={{ issue, setIssue, order, setOrder } satisfies Shared} />
+        </Suspense>
       </main>
       <Footer />
+      <ScrollRestoration />
     </>
   )
 }
+
+export const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/issues/:slug', element: <IssuePage /> },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+])

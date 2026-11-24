@@ -1,15 +1,26 @@
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { EMAIL } from '../sections/Letters'
 import { Cat, Kettle, KopiCup, Stools, useInView } from './Sketches'
 import s from './Footer.module.css'
 
-// The glass is empty by now (it drains as you read). Offer a refill: back to the cover, chips focused.
-function orderAnother() {
-  scrollTo({ top: 0 })
-  setTimeout(() => document.querySelector<HTMLButtonElement>('[aria-label="Drink"] button')?.focus({ preventScroll: true }), 900)
-}
+const focusChips = () =>
+  document.querySelector<HTMLButtonElement>('[aria-label="Drink"] button')?.focus({ preventScroll: true })
 
 export function Footer() {
   const [ref, seen] = useInView<HTMLDivElement>('0px')
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  // The glass is empty by now (it drains as you read). Offer a refill: back to the cover, chips focused.
+  function orderAnother() {
+    if (pathname !== '/') {
+      navigate('/')
+      setTimeout(focusChips, 300)
+      return
+    }
+    scrollTo({ top: 0 })
+    setTimeout(focusChips, 900)
+  }
 
   return (
     <footer className={s.footer}>
@@ -35,8 +46,9 @@ export function Footer() {
           <h2 className={`label ${s.head}`}>Elsewhere</h2>
           <ul className={s.links}>
             <li><a href={`mailto:${EMAIL}`}>Email</a></li>
-            <li><a href="#letters">Write a letter</a></li>
-            <li><a href="#cover">Back to cover ↑</a></li>
+            <li><Link to="/#letters">Write a letter</Link></li>
+            <li><Link to="/#shelf">All issues</Link></li>
+            <li><Link to="/" viewTransition onClick={() => scrollTo({ top: 0 })}>Back to cover ↑</Link></li>
           </ul>
         </div>
         <div>

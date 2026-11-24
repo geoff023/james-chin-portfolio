@@ -71,7 +71,7 @@ export function Process() {
   }, [])
 
   return (
-    <section id="process" ref={section} className={s.process} aria-labelledby="process-title">
+    <section id="process" data-folio="16" ref={section} className={s.process} aria-labelledby="process-title">
       <div className={`label ${s.rule}`}>
         <span>03 — How an issue gets made</span>
         <span>Six steps, about four months</span>
