@@ -74,7 +74,7 @@ export function Process() {
 
       <div className={s.head}>
         <h2 id="process-title" className={s.title}>
-          <span>How I make</span>
+          <span><span className="swash">H</span>ow I make</span>
           <span className={s.title2}>an issue</span>
         </h2>
         <p className={s.intro}>

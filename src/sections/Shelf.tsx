@@ -13,7 +13,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
 
       <div className={s.head}>
         <h2 id="shelf-title" className={s.title}>
-          The Shelf
+          <span className="swash">T</span>he Shelf
         </h2>
         <p className={s.intro}>
           Everything I’ve published since 2019: {issues.length} issues, one drink each, {inPrint} still in

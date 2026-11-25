@@ -22,7 +22,7 @@ export function EditorLetter() {
 
         <div className={s.body}>
           <h2 id="editor-title" className={s.title}>
-            Dear reader,
+            <span className="swash">D</span>ear reader,
           </h2>
           <div className={s.columns}>
             <p className={s.lede}>

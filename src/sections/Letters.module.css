@@ -20,7 +20,6 @@
 }
 .title > span { display: block; width: max-content; }
 .title2 { margin-left: 1.1em; font-style: italic; }
-.swash { font-family: var(--script); font-size: 1.15em; line-height: 0; }
 
 .layout {
   display: grid;

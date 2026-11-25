@@ -70,7 +70,7 @@ export function Masthead() {
 
       <h2 id="masthead-title" className={s.title}>
         <Misregistered>
-          <span className={s.swash}>M</span>asthead
+          <span className="swash">M</span>asthead
         </Misregistered>
       </h2>
 

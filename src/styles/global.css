@@ -32,6 +32,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   letter-spacing: 0.01em;
 }
 
+/* header initial: one calligraphic capital, the rest of the word in the serif */
+.swash { font-family: var(--script); font-style: normal; font-size: 1.15em; line-height: 0; }
+
 .hand {
   font-family: var(--hand);
   font-size: 1.5rem;

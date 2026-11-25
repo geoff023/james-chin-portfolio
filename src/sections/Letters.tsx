@@ -66,7 +66,7 @@ export function Letters() {
 
       <h2 id="letters-title" className={s.title}>
         <Misregistered>
-          <span className={s.swash}>L</span>etters
+          <span className="swash">L</span>etters
         </Misregistered>
         <span className={s.title2}>to the Editor</span>
       </h2>

@@ -45,7 +45,7 @@ export function Numbers() {
   return (
     <section id="numbers" data-folio="14" className={s.numbers} aria-labelledby="numbers-title">
       <div className={s.head}>
-        <h2 id="numbers-title" className={s.title}>By the numbers</h2>
+        <h2 id="numbers-title" className={s.title}><span className="swash">B</span>y the numbers</h2>
         <p className={s.sub}>Seven years of a magazine, give or take a cat.</p>
       </div>
 
