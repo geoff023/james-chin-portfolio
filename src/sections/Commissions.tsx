@@ -15,7 +15,7 @@ export function Commissions() {
       <div className={s.head}>
         {/* opener: a standfirst sentence instead of a title */}
         <h2 id="commissions-title" className={s.title}>
-          <span className="swash">B</span>etween issues I art-direct for cafés, drink brands and festivals.
+          <span className="swash">B</span>etween issues I <span className={s.nowrap}>art-direct</span> for cafés, drink brands and festivals.
         </h2>
         <p className={s.intro}>
           The studio side pays for the printing. The rule is the same as the magazine’s: less sweet.

@@ -30,7 +30,7 @@
   /* layout */
   --gutter: 24px;
   --edge: clamp(16px, 4vw, 56px);
-  --section-pad: clamp(6rem, 12vw, 12rem);
+  --section-pad: clamp(4rem, 7vw, 7rem);
 
   /* motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);

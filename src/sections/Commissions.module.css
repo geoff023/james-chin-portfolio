@@ -21,8 +21,9 @@
   letter-spacing: -0.015em;
   text-wrap: balance;
 }
+.nowrap { white-space: nowrap; } /* keep art-direct from splitting at its hyphen */
 .intro {
-  grid-column: 6 / 12;
+  grid-column: 1 / 7; /* same left edge as the title */
   margin-top: clamp(1rem, 2vw, 1.5rem);
   max-width: 44ch;
   font-size: 1.0625rem;
@@ -158,7 +159,7 @@
 
 @media (max-width: 1023px) {
   .title { grid-column: 1 / -1; }
-  .intro { grid-column: 3 / 12; }
+  .intro { grid-column: 1 / 10; }
   .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
 }
 

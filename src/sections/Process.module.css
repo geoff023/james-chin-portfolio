@@ -1,6 +1,6 @@
 .process {
   position: relative;
-  padding: var(--section-pad) var(--edge) clamp(4rem, 8vw, 7rem);
+  padding: var(--section-pad) var(--edge) clamp(3rem, 5vw, 4.5rem);
   --p: 0;
 }
 
