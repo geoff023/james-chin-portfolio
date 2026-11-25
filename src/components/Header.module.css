@@ -33,17 +33,6 @@
   from { transform: translateY(60%); opacity: 0; }
 }
 
-.serving {
-  position: absolute;
-  left: 50%;
-  translate: -50% 0;
-  top: 18px;
-  color: var(--ink-soft);
-  white-space: nowrap;
-}
-.servingDrink { display: inline-block; color: var(--ink); animation: tick 0.45s var(--ease-out); }
-@media (max-width: 900px) { .serving { display: none; } }
-
 .toggle {
   position: relative;
   padding: 4px 0;

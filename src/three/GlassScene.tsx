@@ -295,7 +295,6 @@ export default function GlassScene({ drink, label }: { drink: Drink; label: stri
     <div
       ref={wrap}
       role="img"
-      data-cursor="tilt"
       aria-label={`${label}. Drag, or focus and use the arrow keys, to tilt the glass.`}
       tabIndex={0}
       onKeyDown={(e) => {

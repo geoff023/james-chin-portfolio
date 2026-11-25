@@ -114,29 +114,6 @@
   width: min(25vw, 360px);
   aspect-ratio: 3 / 4;
 }
-.hint {
-  position: absolute;
-  right: calc(7vw + min(25vw, 360px) - 1rem);
-  bottom: calc(var(--above-strip) + 30vh);
-  z-index: 3;
-  display: flex;
-  align-items: flex-start;
-  gap: 4px;
-  color: #fffdf7;
-  transform: rotate(-6deg);
-  white-space: nowrap;
-  text-shadow: 0 1px 6px rgba(29, 26, 23, 0.35);
-}
-.arrow {
-  width: 56px;
-  margin-top: 6px;
-  rotate: 70deg;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
 /* foreground: the cover flash and the order strip */
 .front { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
@@ -196,9 +173,6 @@
 .flash { animation: rise 1s var(--ease-out) 0.7s backwards; }
 .strip { animation: stripIn 0.9s var(--ease-out) 0.9s backwards; }
 .glass { animation: settle 1.4s var(--ease-out) 0.5s backwards; }
-.hint { animation: fade 0.6s ease-out 1.6s backwards; }
-.arrow path { stroke-dasharray: 1; animation: draw 0.7s ease-out 1.9s backwards; }
-.arrow path + path { animation-delay: 2.4s; animation-duration: 0.3s; }
 
 @keyframes fade { from { opacity: 0; } }
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } }
@@ -206,7 +180,6 @@
 @keyframes hillsIn { from { transform: translateY(12%); } }
 @keyframes stripIn { from { transform: translateY(100%); } }
 @keyframes settle { from { opacity: 0; transform: translateY(40px) rotate(8deg); } }
-@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
 /* short windows (laptops with toolbars, landscape tablets): tighten the cover card so it fits
    between the masthead and the order slip */
@@ -227,7 +200,6 @@
 @media (max-width: 1023px) {
   .flash { width: min(52vw, 440px); }
   .glass { width: min(34vw, 300px); right: 3vw; }
-  .hint { display: none; }
 }
 
 /* phones: the picture is the stage; the flash and order strip follow in the page flow */

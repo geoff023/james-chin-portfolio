@@ -70,13 +70,6 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
           <div className={s.halftone} aria-hidden="true" />
 
           <GlassStage className={s.glass} drink={drink} label={label} />
-          <p className={`hand ${s.hint}`} aria-hidden="true">
-            go on, tilt it
-            <svg viewBox="0 0 80 60" className={s.arrow}>
-              <path pathLength="1" d="M4 50c20 0 42-10 56-40" />
-              <path pathLength="1" d="M47 14l13-4 3 13" />
-            </svg>
-          </p>
         </div>
 
         <div className={s.front}>

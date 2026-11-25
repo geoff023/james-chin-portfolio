@@ -61,7 +61,10 @@
   height: clamp(110px, 14vw, 190px);
   margin: 0 calc(var(--edge) * -1);
   color: var(--riso-red);
+  --sketch-ink: color-mix(in srgb, var(--issue-accent), var(--ink) 22%);
 }
+.objects :global(.sketch-ink) { opacity: 0; transition: opacity 0.8s 1.2s; }
+.seen :global(.sketch-ink) { opacity: 1; }
 .objects svg { position: absolute; bottom: -6px; height: 100%; width: auto; }
 .o1 { left: 6%; }
 .o2 { left: 24%; height: 55% !important; }

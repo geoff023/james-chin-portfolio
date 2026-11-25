@@ -1,12 +1,10 @@
-import type { ComponentType, CSSProperties } from 'react'
-import { CupSleeve, MenuBoard, Programme, Tote } from '../components/Sketches'
+import type { CSSProperties } from 'react'
 import { commissions } from '../data/commissions'
 import s from './Commissions.module.css'
 
-// sketch pair standing in for each project's photo until plan §9 F lands
-const plates: Record<string, [ComponentType<{ className?: string }>, ComponentType<{ className?: string }>, string]> = {
-  'hawker-futures': [Programme, Tote, 'Fig. 1: programme and tote, two inks, Penang'],
-  'toast-and-kettle': [CupSleeve, MenuBoard, 'Fig. 2: cup sleeve and the one-page menu'],
+const captions: Record<string, string> = {
+  'hawker-futures': 'Fig. 1: programme and tote, two inks, Penang',
+  'toast-and-kettle': 'Fig. 2: cup sleeve and the one-page menu',
 }
 
 // Client work, each laid out as a magazine spread: plate on one page, story on the other.
@@ -26,7 +24,7 @@ export function Commissions() {
 
       <div className={s.list}>
         {commissions.map((c, i) => {
-          const [A, B, caption] = plates[c.slug]
+          const caption = captions[c.slug]
           return (
             <article
               key={c.slug}
@@ -37,16 +35,11 @@ export function Commissions() {
               <figure className={s.plate}>
                 {c.image ? (
                   <img src={c.image} alt="" loading="lazy" width={1600} height={1200} />
-                ) : c.cutouts ? (
+                ) : c.cutouts && (
                   // the real pieces, laid on the plate like a flat-lay: programme behind, tote in front
                   <div className={`${s.sketches} ${c.cutoutsTall ? s.tall : ''}`} aria-hidden="true">
                     <img className={`${s.cutout} ${s.cutBack}`} src={c.cutouts[0]} alt="" loading="lazy" decoding="async" />
                     <img className={`${s.cutout} ${s.cutFront}`} src={c.cutouts[1]} alt="" loading="lazy" decoding="async" />
-                  </div>
-                ) : (
-                  <div className={s.sketches} aria-hidden="true">
-                    <A className={s.sketchA} />
-                    <B className={s.sketchB} />
                   </div>
                 )}
                 <figcaption className={`label ${s.caption}`}>{caption}</figcaption>

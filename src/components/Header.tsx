@@ -36,7 +36,7 @@ export function Header() {
     }
   }, [pathname])
 
-  // now serving: re-check every minute; the drink also tints one of the page washes
+  // time of day picks the drink that tints one of the page washes; re-check every minute
   useEffect(() => {
     const t = setInterval(() => setServing(servingAt(new Date().getHours())), 60_000)
     return () => clearInterval(t)
@@ -61,9 +61,6 @@ export function Header() {
           {slug ? `Kurang Manis, issue ${shown.no}` : 'founder of Kurang Manis'}
         </span>
         <span>p. <span key={page} className={s.page}>{page}</span></span>
-      </p>
-      <p className={`label ${s.serving}`}>
-        Now serving: <span key={serving.drink} className={s.servingDrink}>{serving.drink}</span>
       </p>
       <button className={`label ${s.toggle}`} onClick={() => setOpen(true)} aria-haspopup="dialog">
         Contents

@@ -200,7 +200,7 @@
 .stools, .cat { position: absolute; bottom: 0; }
 .stools { right: 14%; width: clamp(80px, 9vw, 130px); }
 .stools + .stools { right: calc(14% + clamp(70px, 8vw, 115px)); transform: scaleX(-1) rotate(-3deg); }
-.cat { right: calc(14% + clamp(14px, 1.6vw, 24px)); bottom: clamp(56px, 6.2vw, 92px); width: clamp(56px, 6vw, 86px); }
+.cat { right: calc(14% + clamp(14px, 1.6vw, 24px)); bottom: clamp(44px, 4.9vw, 72px); width: clamp(56px, 6vw, 86px); }
 .scatter path {
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
@@ -208,6 +208,8 @@
 }
 .scatter.seen path { stroke-dashoffset: 0; }
 .scatter.seen .cat path { transition-delay: 0.9s; }
+.scatter :global(.sketch-ink) { opacity: 0; transition: opacity 0.8s 1.2s; }
+.scatter.seen :global(.sketch-ink) { opacity: 1; }
 
 @media (max-width: 1023px) {
   .title { grid-column: 1 / 10; }

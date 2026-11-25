@@ -46,6 +46,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-radius: 48% 52% 45% 55% / 55% 45% 55% 45%;
 }
 
+/* second ink of the line drawings (Sketches.tsx): the issue colour, overprinted */
+.sketch-ink { fill: var(--sketch-ink, var(--issue-accent)); mix-blend-mode: multiply; transition: fill 1.2s var(--ease-out); }
+
 .skip-link {
   position: fixed;
   left: var(--edge);
