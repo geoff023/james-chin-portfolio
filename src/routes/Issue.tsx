@@ -7,7 +7,6 @@ import {
 } from '../components/Sketches'
 import { caseStudies, type Sketch } from '../data/caseStudies'
 import { issues, type Issue } from '../data/issues'
-import { GlassPoster } from '../sections/GlassPoster'
 import { NotFound } from './NotFound'
 import s from './Issue.module.css'
 
@@ -28,7 +27,7 @@ function CoverMock({ issue, coverLine }: { issue: Issue; coverLine: boolean }) {
     <div className={s.cover} aria-hidden="true">
       <span className={s.coverMast}>Kurang Manis</span>
       <span className={`label ${s.coverNo}`}>No. {issue.no}</span>
-      <GlassPoster className={s.coverGlass} liquid={issue.glass.liquid} ice={issue.glass.ice} />
+      <img className={s.coverPhoto} src={`/images/drinks/${issue.no}.webp`} alt="" width={900} height={1125} />
       {coverLine && <span className={s.coverLine}>{issue.title}</span>}
     </div>
   )

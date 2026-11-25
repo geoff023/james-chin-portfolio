@@ -17,6 +17,15 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
     ? `A glass of ${orderName(order)}`
     : `A glass of ${issue.drink.toLowerCase()}, ${issue.drinkEn}`
 
+  // the order slip wraps to more rows on narrower screens; keep the cover card and glass above it
+  useEffect(() => {
+    const el = ref.current!
+    const slip = el.querySelector<HTMLElement>(`.${s.strip}`)!
+    const ro = new ResizeObserver(() => el.style.setProperty('--strip-h', `${slip.offsetHeight}px`))
+    ro.observe(slip)
+    return () => ro.disconnect()
+  }, [])
+
   useEffect(() => {
     const el = ref.current!
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -10,15 +10,17 @@ const iceCubes = (
 
 export function GlassPoster({
   className,
+  style,
   liquid = 'var(--issue-accent)',
   ice = true,
 }: {
   className?: string
+  style?: React.CSSProperties
   liquid?: string
   ice?: boolean
 }) {
   return (
-    <svg viewBox="0 0 260 420" className={className} aria-hidden="true" fill="none">
+    <svg viewBox="0 0 260 420" className={className} style={style} aria-hidden="true" fill="none">
       <path fill={liquid} transform="translate(6 4)" d="M44 150 C80 142 180 158 216 148 L200 392 C170 400 90 400 60 392 Z" />
       {ice && <g fill="var(--paper)" opacity="0.55" transform="translate(6 4)">{iceCubes}</g>}
       <g stroke="var(--riso-red)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">

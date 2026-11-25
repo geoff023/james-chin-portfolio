@@ -83,8 +83,8 @@
 
 .frost {
   position: absolute;
-  inset: 34% 0 0;
-  background: color-mix(in srgb, var(--paper) 38%, transparent);
+  inset: 64% 0 0; /* frost only the bottom third, under the title */
+  background: color-mix(in srgb, var(--paper) 22%, transparent);
   backdrop-filter: blur(5px) saturate(1.15);
   -webkit-backdrop-filter: blur(5px) saturate(1.15);
   border-top: 1px solid color-mix(in srgb, #fff 60%, transparent);
@@ -104,45 +104,73 @@
   display: grid;
   gap: 4px;
   padding: 16px;
-  color: var(--ink);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+  /* tone on tone: each cover's type is a deep shade of its own colour (>= 5:1 on the fade) */
+  color: color-mix(in srgb, var(--tint) 30%, var(--ink));
 }
+/* a soft paper fade under the type, so it reads on every cover */
 .meta::before {
   content: '';
   position: absolute;
-  inset: -30px 0 0;
+  inset: -40px 0 0;
   z-index: -1;
   background: linear-gradient(to top, color-mix(in srgb, var(--paper) 92%, transparent) 40%, transparent);
 }
 .cardTitle {
+  color: color-mix(in srgb, var(--tint) 40%, var(--ink));
   font-family: var(--serif);
   font-size: clamp(1.5rem, 1.1rem + 1vw, 2.1rem);
   line-height: 1;
 }
-.cardLine {
+/* the extra line and the sold-out note open up on hover / focus */
+.cardLine, .soldNote {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
   font-size: 0.75rem;
   line-height: 1.4;
-  color: var(--ink-soft);
+  color: color-mix(in srgb, var(--tint) 30%, var(--ink));
+  transition: max-height 0.5s var(--ease-out), opacity 0.4s;
 }
-.soldNote {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--riso-red-ink);
-}
+.soldNote { font-weight: 600; color: var(--riso-red-ink); }
 
 /* hover / focus: frost clears, cover lifts, title slides up */
 .card:hover, .card:focus-visible { transform: translateY(-6px); box-shadow: 0 1px 0 rgba(29, 26, 23, 0.06), 0 28px 40px -26px rgba(29, 26, 23, 0.7); }
 .card:hover .frost, .card:focus-visible .frost { opacity: 0; transform: translateY(12px); }
 .card:hover .art, .card:focus-visible .art { transform: scale(1.04) rotate(-1.5deg); }
-.card:hover .meta, .card:focus-visible .meta, .big .meta { opacity: 1; transform: none; }
+.card:hover .cardLine, .card:focus-visible .cardLine, .big .cardLine,
+.card:hover .soldNote, .card:focus-visible .soldNote { max-height: 4.5em; opacity: 1; }
 
 .big .cardTitle { font-size: clamp(2.2rem, 1.4rem + 2.4vw, 3.6rem); }
 .big .cardLine { font-size: 0.875rem; max-width: 36ch; }
 .big .meta { padding: 24px; }
 
 /* on the counter: picked issue */
+/* cover + its pour stamp; the stamp sits on the cover but isn't inside the link */
+.coverWrap { position: relative; display: block; }
+.big .coverWrap { flex: 1; }
+
+.pour {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  padding: 6px 10px 5px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  color: var(--ink);
+  font-weight: 800;
+  rotate: 4deg;
+  transition: transform 0.25s var(--ease-out), background-color 0.2s, color 0.2s;
+}
+.pour:hover, .pour:focus-visible { background: var(--ink); color: var(--paper); transform: translateY(-2px) rotate(-3deg); }
+.pour:active { transform: scale(0.94); }
+.pour[aria-pressed='true'] { background: var(--riso-red-ink); border-color: var(--riso-red-ink); color: #fffdf7; }
+
+.inPrint { color: var(--riso-red-ink); font-weight: 700; }
+
+.picked .card,
 .card[aria-pressed='true'] {
   outline: 2px solid var(--riso-red);
   outline-offset: 5px;
@@ -181,8 +209,6 @@
   margin-top: 10px;
   color: var(--ink-soft);
 }
-.read { color: var(--riso-red-ink); font-weight: 700; text-decoration: none; border-bottom: 1px solid currentColor; }
-.read:hover { color: var(--ink); }
 
 .folio {
   position: absolute;
@@ -218,8 +244,7 @@
   .big .card { aspect-ratio: 4 / 5; }
 }
 
-/* no hover on touch: show titles */
+/* no hover on touch: show the extra line too */
 @media (hover: none) {
-  .meta { opacity: 1; transform: none; }
-  .frost { inset: 50% 0 0; }
+  .cardLine { max-height: 4.5em; opacity: 1; }
 }

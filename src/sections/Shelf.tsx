@@ -1,10 +1,11 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Misregistered } from '../components/Misregistered'
 import { issues, type Issue } from '../data/issues'
 import s from './Shelf.module.css'
 
-// Every issue as a frosted cover. Picking one pours it into the glass on the cover.
+// Every issue as a frosted cover. In-print covers open the issue; a "Pour it" stamp (or any
+// sold-out cover) pours that drink into the glass on the cover.
 export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Issue) => void }) {
   const inPrint = issues.filter((i) => i.featured).length
 
@@ -20,8 +21,8 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
           <Misregistered>The Shelf</Misregistered>
         </h2>
         <p className={s.intro}>
-          Everything I’ve published since 2019, one drink each. Pick a cover and I’ll pour it into
-          the glass up top.
+          Everything I’ve published since 2019, one drink each. Open a cover to read the issue, or
+          hit <i>Pour it</i> and I’ll pour that drink into the glass up top.
         </p>
         {active && active.no !== issues[0].no && (
           <a href="#cover" className={`hand ${s.poured}`}>
@@ -35,13 +36,8 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
           const pressed = active?.no === it.no
           return (
             <li key={it.no} className={i < 2 ? s.big : undefined}>{/* this issue + last issue lead */}
-              <button
-                type="button"
-                className={s.card}
-                style={{ '--tint': it.accent } as CSSProperties}
-                aria-pressed={pressed}
-                onClick={() => onPick(it)}
-              >
+              <div className={`${s.coverWrap} ${pressed ? s.picked : ''}`} style={{ '--tint': it.accent } as CSSProperties}>
+              <Cover issue={it} onPick={onPick} pressed={pressed}>
                 <span className={s.art} aria-hidden="true">
                   <img src={`/images/drinks/${it.no}.webp`} alt="" width={900} height={1125} loading="lazy" decoding="async" />
                 </span>
@@ -52,20 +48,26 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                   <span className={s.cardTitle}>{it.title}</span>
                   <span className={s.cardLine}>{it.line}</span>
                   {!it.featured && <span className={s.soldNote}>Sold out. Ask your kopitiam uncle.</span>}
-                  <span className="visually-hidden">{it.featured ? 'In print. ' : ''}Pour it into the glass.</span>
+                  <span className="visually-hidden">{it.featured ? 'Read the issue.' : 'Sold out. Pour it into the glass.'}</span>
                 </span>
                 {!it.featured && <span className={s.stamp} aria-hidden="true">Sold out</span>}
                 {pressed && <span className={`hand ${s.counter}`} aria-hidden="true">on the counter</span>}
-              </button>
-              <p className={`label ${s.caption}`}>
-                <span aria-hidden="true">{it.no}</span>
-                {it.featured ? (
-                  <Link to={`/issues/${it.slug}`} viewTransition className={s.read}>
-                    Read issue {it.no} <span aria-hidden="true">→</span>
-                  </Link>
-                ) : (
-                  <span aria-hidden="true">{it.drink}</span>
-                )}
+              </Cover>
+              {it.featured && (
+                <button
+                  type="button"
+                  className={`label ${s.pour}`}
+                  aria-pressed={pressed}
+                  aria-label={`Pour ${it.drink} into the glass`}
+                  onClick={() => onPick(it)}
+                >
+                  Pour it ↑
+                </button>
+              )}
+              </div>
+              <p className={`label ${s.caption}`} aria-hidden="true">
+                <span>{it.no}</span>
+                <span className={it.featured ? s.inPrint : undefined}>{it.featured ? 'In print · read →' : it.drink}</span>
               </p>
             </li>
           )
@@ -74,5 +76,21 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
 
       <span className={`label ${s.folio}`} aria-hidden="true">08</span>
     </section>
+  )
+}
+
+// In-print issues: the cover is a link to the case study. Sold out: the cover pours the drink.
+function Cover({ issue, pressed, onPick, children }: { issue: Issue; pressed: boolean; onPick: (i: Issue) => void; children: ReactNode }) {
+  if (issue.featured) {
+    return (
+      <Link to={`/issues/${issue.slug}`} viewTransition className={s.card}>
+        {children}
+      </Link>
+    )
+  }
+  return (
+    <button type="button" className={s.card} aria-pressed={pressed} onClick={() => onPick(issue)}>
+      {children}
+    </button>
   )
 }

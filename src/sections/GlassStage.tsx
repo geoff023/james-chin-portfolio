@@ -29,7 +29,8 @@ export function GlassStage({ drink, label, className }: { drink: Drink; label: s
 
   const poster = (
     <div role="img" aria-label={label} style={{ height: '100%', display: 'grid', placeItems: 'center' }}>
-      <GlassPoster />
+      {/* sized to the slot, poured in the current drink's colour */}
+      <GlassPoster style={{ height: '100%', width: 'auto', maxWidth: '100%' }} liquid={drink.liquid} ice={drink.ice} />
     </div>
   )
 
