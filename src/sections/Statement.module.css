@@ -38,15 +38,34 @@
   color: var(--ink-soft);
 }
 
-/* the closing sentence, same voice and size as the lines above */
+/* the closing sentence in capitals, left-aligned, with picture chips set in the line */
 .band {
-  margin-top: 0.6em;
-  max-width: 24em;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--hairline);
   font-family: var(--serif);
-  font-size: clamp(2.2rem, 1.2rem + 4.2vw, 5.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.015em;
+  font-size: clamp(1.6rem, 1rem + 2.4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
 }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9em;
+  height: 0.8em;
+  margin: 0 0.22em;
+  border-radius: 999px;
+  vertical-align: 0.02em;
+  color: var(--riso-red);
+  --sketch-ink: color-mix(in srgb, var(--issue-accent), var(--ink) 22%); /* chip is already the issue colour */
+  overflow: hidden;
+  transition: width 0.6s var(--ease-out), background-color 1.2s var(--ease-out);
+}
+.pill svg { height: 0.95em; flex: none; transition: transform 0.6s var(--ease-out); }
+.pill:hover { width: 2.8em; }
+.pill:hover svg { transform: rotate(-8deg) scale(1.08); }
 
 .folio {
   position: absolute;

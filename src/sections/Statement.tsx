@@ -1,4 +1,5 @@
 import { GlossaryTerm } from '../components/GlossaryTerm'
+import { KopiCup, MagStack } from '../components/Sketches'
 import s from './Statement.module.css'
 
 // Manifesto: two stepped lines, the motto (Kurang manis in red), then one plain sentence.
@@ -20,7 +21,15 @@ export function Statement() {
       </div>
 
       <p className={s.band}>
-        Every issue starts with one drink and ends with 3,000 copies, folded by hand.
+        <span className="swash">E</span>very issue starts with
+        <span className={s.pill} style={{ background: 'color-mix(in srgb, var(--issue-accent) 45%, var(--paper))' }}>
+          <KopiCup />
+        </span>
+        one drink and ends with
+        <span className={s.pill} style={{ background: 'color-mix(in srgb, var(--riso-blue) 45%, var(--paper))' }}>
+          <MagStack />
+        </span>
+        3,000 copies, folded by hand.
       </p>
 
       <span className={`label ${s.folio}`} aria-hidden="true">12</span>
