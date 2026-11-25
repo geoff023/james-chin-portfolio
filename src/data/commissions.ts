@@ -9,7 +9,8 @@ export type Commission = {
   did: string[]
   facts: [string, string][]
   tint: string
-  image?: string // public/images/commissions/*.webp when the photos land (plan §9 F)
+  image?: string // a single full-bleed photo for the plate
+  cutouts?: [back: string, front: string] // or two transparent cut-outs composed on the plate
   page: string
 }
 
@@ -29,6 +30,7 @@ export const commissions: Commission[] = [
     ],
     facts: [['Programme', '64 pp, riso'], ['Printed', '8,000'], ['Stalls', '41'], ['Signwriter', '1, very patient']],
     tint: '#7FAEDB',
+    cutouts: ['/images/commissions/hawker-programme.webp', '/images/commissions/hawker-tote.webp'],
     page: '24',
   },
   {

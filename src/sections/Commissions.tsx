@@ -15,12 +15,12 @@ export function Commissions() {
     <section id="commissions" data-folio="24" className={s.commissions} aria-labelledby="commissions-title">
 
       <div className={s.head}>
+        {/* opener: a standfirst sentence instead of a title */}
         <h2 id="commissions-title" className={s.title}>
-          The studio side
+          Between issues I art-direct for cafés, drink brands and festivals.
         </h2>
         <p className={s.intro}>
-          Between issues I art-direct for cafés, drink brands and festivals. It pays for the
-          printing, and the rule is the same as the magazine’s: less sweet.
+          The studio side pays for the printing. The rule is the same as the magazine’s: less sweet.
         </p>
       </div>
 
@@ -37,6 +37,12 @@ export function Commissions() {
               <figure className={s.plate}>
                 {c.image ? (
                   <img src={c.image} alt="" loading="lazy" width={1600} height={1200} />
+                ) : c.cutouts ? (
+                  // the real pieces, laid on the plate like a flat-lay: programme behind, tote in front
+                  <div className={s.sketches} aria-hidden="true">
+                    <img className={`${s.cutout} ${s.cutBack}`} src={c.cutouts[0]} alt="" loading="lazy" decoding="async" />
+                    <img className={`${s.cutout} ${s.cutFront}`} src={c.cutouts[1]} alt="" loading="lazy" decoding="async" />
+                  </div>
                 ) : (
                   <div className={s.sketches} aria-hidden="true">
                     <A className={s.sketchA} />

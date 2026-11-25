@@ -3,7 +3,34 @@
   padding: var(--section-pad) var(--edge) clamp(4rem, 8vw, 7rem);
 }
 
-/* My Forest: hairline rule + tiny margin label opens every section */
+/* opener: "The Shelf" runs up a book spine on the left and stays pinned while the covers
+   scroll past; the intro and the grid sit to its right (desktop and tablet) */
+@media (min-width: 768px) {
+  .shelf {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+  }
+  .shelf .head { display: contents; } /* children join the section grid; beats the base .head rule below */
+  .shelf .title {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    padding-left: clamp(0.75rem, 1.5vw, 1.25rem);
+    border-left: 1px solid var(--hairline);
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 0.9;
+    white-space: nowrap;
+  }
+  .shelf .intro { grid-column: 2; grid-row: 1; max-width: 52ch; margin: 0 0 1rem; font-size: 1rem; }
+  .shelf .poured { grid-column: 2; grid-row: 2; margin: 0 0 1.5rem; }
+  .shelf .grid { grid-column: 2; grid-row: 3; margin-top: 1.5rem; }
+}
 
 .head {
   display: grid;
@@ -234,6 +261,7 @@
   .grid::-webkit-scrollbar { display: none; }
   .grid li { flex: 0 0 72%; scroll-snap-align: start; }
   .big .card { aspect-ratio: 4 / 5; }
+  .shelf .cardLine { display: none; } /* too small a cover for a sentence; the title says enough */
 }
 
 /* no hover on touch: show the extra line too */

@@ -4,16 +4,22 @@
 }
 
 
+/* opener: set right, like a letterhead, closed by a double rule */
 .title {
+  display: grid;
+  justify-items: end;
   margin: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+  border-bottom: 3px double var(--hairline);
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(3.2rem, 1.6rem + 6vw, 8.5rem);
   line-height: 0.88;
   letter-spacing: -0.02em;
+  text-align: right;
 }
 .title > span { display: block; width: max-content; }
-.title2 { margin-left: 1.1em; font-style: italic; }
+.title2 { margin-right: 1.1em; font-style: italic; }
 .swash { font-family: var(--script); font-size: 1.15em; line-height: 0; }
 
 .layout {
@@ -166,7 +172,7 @@
   .aside > :not(.cup) { grid-column: 2; }
 }
 @media (max-width: 767px) {
-  .title2 { margin-left: 0.4em; }
+  .title2 { margin-right: 0.4em; }
   .signRow { grid-template-columns: 1fr; }
   .sheet { rotate: 0deg; }
 }
