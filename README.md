@@ -6,8 +6,6 @@ and drives the boxes. This is his site, built like an issue of his magazine. Til
 
 **Live:** [james-chin-portfolio.vercel.app](https://james-chin-portfolio.vercel.app)
 
-<!-- Hero GIF: record the glass tilt + a Shelf pick (e.g. with ScreenToGif) and save as docs/hero.gif -->
-
 ## Concept
 
 James grew up above his parents' kopitiam in Ipoh, spent six years designing hotel menus in
@@ -96,10 +94,10 @@ SVG poster, the same page scores in the mid-70s.
 
 - Type: Instrument Serif, Pinyon Script, Archivo (variable width) and Nanum Pen Script, self-hosted
   via Fontsource.
-- AI-assisted imagery, all edited for the site: the drink photographs on the Shelf, the cover
-  clouds and hills, the commission pieces (festival programme, tote, café menu and cup) and the
-  portrait of James. Each was cropped, colour-graded to the riso palette and given halftone and
-  grain in CSS. _Name the tool you used here._
+- AI-assisted imagery, generated with ChatGPT and edited for the site: the drink photographs on
+  the Shelf, the cover clouds and hills, the commission pieces (festival programme, tote, café menu
+  and cup) and the portrait of James. Each was cropped, colour-graded to the riso palette and given
+  halftone and grain in CSS.
 - Line drawings (cups, stools, maps, the cat and friends) are drawn by hand in code as two-ink SVG.
 - Case-study spreads use those drawings as plates. To swap in photographs, set `photo` on a spread
   in `src/data/caseStudies.ts` and it gets a riso duotone automatically.
