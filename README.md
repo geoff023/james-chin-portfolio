@@ -4,7 +4,7 @@ James Chin (fictional) started *Kurang Manis* in 2019, a print quarterly about w
 drinks, and still makes every issue himself: he picks the drink, edits the words, designs the pages
 and drives the boxes. This is his site, built like an issue of his magazine. Tilt the glass.
 
-**Live:** _add the Vercel URL here after deploying_
+**Live:** [james-chin-portfolio.vercel.app](https://james-chin-portfolio.vercel.app)
 
 <!-- Hero GIF: record the glass tilt + a Shelf pick (e.g. with ScreenToGif) and save as docs/hero.gif -->
 

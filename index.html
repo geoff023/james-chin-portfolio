@@ -12,19 +12,20 @@
     <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- sharing. TODO after deploy: make og:image / twitter:image absolute (https://<domain>/og-image.png) and add og:url -->
+    <!-- sharing: absolute URLs, because link previews fetch them from outside the site -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://james-chin-portfolio.vercel.app/" />
     <meta property="og:site_name" content="James Chin" />
     <meta property="og:title" content="James Chin — Founder &amp; Editor, Kurang Manis" />
     <meta property="og:description" content="A print quarterly about what Southeast Asia drinks, one drink per issue. Tilt the glass." />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="https://james-chin-portfolio.vercel.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="James Chin. Founder and creative director of Kurang Manis, beside a line drawing of a glass of bandung." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="James Chin — Founder &amp; Editor, Kurang Manis" />
     <meta name="twitter:description" content="A print quarterly about what Southeast Asia drinks. Tilt the glass." />
-    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image" content="https://james-chin-portfolio.vercel.app/og-image.png" />
   </head>
   <body>
     <div id="root"></div>
