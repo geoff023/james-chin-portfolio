@@ -35,7 +35,12 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
               <div className={`${s.coverWrap} ${pressed ? s.picked : ''}`} style={{ '--tint': it.accent } as CSSProperties}>
               <Cover issue={it} onPick={onPick} pressed={pressed}>
                 <span className={s.art} aria-hidden="true">
-                  <img src={`/images/drinks/${it.no}.webp`} alt="" width={900} height={1125} loading="lazy" decoding="async" />
+                  <img
+                    src={`/images/drinks/${it.no}.webp`}
+                    srcSet={`/images/drinks/${it.no}-560.webp 560w, /images/drinks/${it.no}.webp 900w`}
+                    sizes="(max-width: 767px) 72vw, (max-width: 1279px) 46vw, 25vw"
+                    alt="" width={900} height={1125} loading="lazy" decoding="async"
+                  />
                 </span>
                 <span className={s.frost} aria-hidden="true" />
                 {/* the visible text is the button's name (WCAG 2.5.3), plus a hidden hint */}
@@ -69,6 +74,8 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
           )
         })}
       </ol>
+      {/* phones get a sideways row; say there is more of it */}
+      <p className={`label ${s.swipe}`} aria-hidden="true">Swipe for all {issues.length} issues</p>
 
       <span className={`label ${s.folio}`} aria-hidden="true">08</span>
     </section>

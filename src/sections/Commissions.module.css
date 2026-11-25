@@ -164,6 +164,7 @@
 }
 
 @media (max-width: 767px) {
+  .facts dt { font-size: 0.8125rem; }
   .head { grid-template-columns: 1fr; }
   .intro { grid-column: 1; }
   .spread { grid-template-columns: 1fr; }

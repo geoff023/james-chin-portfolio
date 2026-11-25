@@ -12,8 +12,8 @@ export function EditorLetter() {
           <img
             src="/illustrations/james.webp"
             alt="Line drawing of James Chin reading a proof, a pen behind his ear."
-            width={900}
-            height={834}
+            width={560}
+            height={519}
             loading="lazy"
             decoding="async"
           />

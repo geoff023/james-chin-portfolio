@@ -93,14 +93,16 @@
 
 /* small screens: drawing on top, stats in a 2×2 grid, no leader lines */
 @media (max-width: 767px) {
-  .stage { aspect-ratio: auto; }
-  .drawing { position: relative; height: auto; aspect-ratio: 2 / 1; }
+  .sub, .label { font-size: 0.875rem; }
+  .stage { aspect-ratio: auto; overflow: hidden; margin-inline: calc(var(--edge) * -1); }
+  /* zoom into the kopitiam corner (stools to stools) so the drawing reads at phone width */
+  .drawing { position: relative; width: 210%; max-width: none; height: auto; margin-left: -60%; aspect-ratio: 2 / 1; }
   .leaders { display: none; }
   .stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.75rem 1rem;
-    margin-top: 1.5rem;
+    margin: 1.5rem var(--edge) 0;
   }
   .stat { position: static; align-items: flex-start !important; text-align: left !important; }
   .head { flex-direction: column; gap: 6px; }

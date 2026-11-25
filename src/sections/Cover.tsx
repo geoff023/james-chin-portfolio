@@ -65,7 +65,7 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
             <Misregistered>Kurang Manis</Misregistered>
             <span className="visually-hidden">, the magazine James Chin started and still makes</span>
           </h1>
-          <img className={s.hills} src="/images/cover/hills.webp" alt="" width={1199} height={281} />
+          <img className={s.hills} src="/images/cover/hills.webp" alt="" width={1199} height={281} fetchPriority="high" />
           <div className={s.ground} aria-hidden="true" />
           <div className={s.halftone} aria-hidden="true" />
 

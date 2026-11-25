@@ -88,7 +88,8 @@
 }
 @media (max-width: 767px) {
   .lists { grid-template-columns: 1fr; }
-  .role { white-space: normal; }
+  /* small caps get too small to read at phone size: plain sentence-case role instead */
+  .role { white-space: normal; font-variant-caps: normal; letter-spacing: 0; font-size: 0.8125rem; color: var(--ink); opacity: 0.7; }
   .name { max-width: 58%; }
   .timeline li { grid-template-columns: 4.4rem 1fr; }
 }

@@ -112,6 +112,10 @@
 @supports not (backdrop-filter: blur(1px)) {
   .frost { background: color-mix(in srgb, var(--paper) 72%, transparent); }
 }
+/* phones: a plain paper tint instead of fourteen live blurs in a scrolling row */
+@media (max-width: 767px) {
+  .frost { backdrop-filter: none; -webkit-backdrop-filter: none; background: color-mix(in srgb, var(--paper) 72%, transparent); }
+}
 
 .meta {
   position: absolute;
@@ -194,6 +198,7 @@
   outline: 2px solid var(--riso-red);
   outline-offset: 5px;
 }
+.swipe { display: none; }
 .counter {
   position: absolute;
   top: 12px;
@@ -262,6 +267,8 @@
   .grid li { flex: 0 0 72%; scroll-snap-align: start; }
   .big .card { aspect-ratio: 4 / 5; }
   .shelf .cardLine { display: none; } /* too small a cover for a sentence; the title says enough */
+  .swipe { display: block; margin-top: 0.5rem; color: var(--ink-soft); }
+  .counter { display: none; } /* the red outline already marks the poured cover; no room beside the stamp */
 }
 
 /* no hover on touch: show the extra line too */

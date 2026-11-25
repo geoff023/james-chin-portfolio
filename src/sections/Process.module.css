@@ -224,7 +224,7 @@
   .title, .intro { grid-column: 1; }
   .intro { grid-row: auto; }
   .title2 { margin-left: 0.5em; }
-  .kettle { grid-column: 1; grid-row: auto; justify-self: end; width: 110px; margin-top: -2rem; }
+  .kettle { grid-column: 1; grid-row: 1; align-self: center; justify-self: end; width: 92px; margin: 0; } /* beside the short title, not floating under the intro */
   .panelInner { grid-template-columns: 56px minmax(0, 1fr); }
   .disc { grid-column: 2; width: 120px; margin-bottom: 0; }
   .body, .note { grid-column: 2; }

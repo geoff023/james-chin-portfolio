@@ -21,6 +21,10 @@
   mask: linear-gradient(#000 55%, transparent);
   -webkit-mask: linear-gradient(#000 55%, transparent);
 }
+/* phones: no live blur under the fixed header while scrolling; a little more paper instead */
+@media (max-width: 767px) {
+  .header::before { backdrop-filter: none; -webkit-backdrop-filter: none; background: color-mix(in srgb, var(--paper) 90%, transparent); }
+}
 
 .folio { display: flex; gap: 1.4em; align-items: baseline; } /* running head: spacing, not dashes */
 .name { font-weight: 700; text-decoration: none; }

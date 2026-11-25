@@ -28,7 +28,7 @@ export function Footer() {
     <footer className={s.footer}>
       <div className={s.top}>
         <p className={s.finished}>
-          <span className="swash">F</span>inished already?
+          <span><span className="swash">F</span>inished already?</span>
           <span className={`hand ${s.empty}`} aria-hidden="true">(the glass up top ran dry)</span>
         </p>
         <button ref={anotherRef} type="button" className={s.another} onClick={orderAnother}>

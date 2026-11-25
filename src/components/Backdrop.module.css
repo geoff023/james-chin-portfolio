@@ -40,10 +40,19 @@
 .grain {
   position: absolute;
   inset: 0;
+  background: url(/images/grain.webp) 0 0 / 96px 96px;
   mix-blend-mode: multiply;
   opacity: 0.25;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .wash { animation: none; }
+}
+/* phones: still washes, and soft edges from a radial gradient instead of a blur filter
+   (three large blurs on a fixed layer cost hundreds of ms of paint on a mid-range phone) */
+@media (max-width: 767px) {
+  .wash { animation: none; filter: none; border-radius: 0; width: 80vmax; }
+  .a { background: radial-gradient(closest-side, var(--issue-accent), transparent); right: -30vmax; }
+  .b { background: radial-gradient(closest-side, var(--serving, var(--riso-yellow)), transparent); left: -34vmax; }
+  .c { background: radial-gradient(closest-side, var(--issue-accent), transparent); bottom: -40vmax; left: 10vw; }
 }

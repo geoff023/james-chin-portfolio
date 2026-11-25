@@ -27,7 +27,13 @@ function CoverMock({ issue, coverLine }: { issue: Issue; coverLine: boolean }) {
     <div className={s.cover} aria-hidden="true">
       <span className={s.coverMast}>Kurang Manis</span>
       <span className={`label ${s.coverNo}`}>No. {issue.no}</span>
-      <img className={s.coverPhoto} src={`/images/drinks/${issue.no}.webp`} alt="" width={900} height={1125} />
+      <img
+        className={s.coverPhoto}
+        src={`/images/drinks/${issue.no}.webp`}
+        srcSet={`/images/drinks/${issue.no}-560.webp 560w, /images/drinks/${issue.no}.webp 900w`}
+        sizes="(max-width: 767px) 80vw, 40vw"
+        alt="" width={900} height={1125}
+      />
       {coverLine && <span className={s.coverLine}>{issue.title}</span>}
     </div>
   )

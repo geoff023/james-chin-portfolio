@@ -79,6 +79,7 @@
   .aside { grid-column: 1 / 8; grid-row: 2; margin-top: 1.5rem; justify-self: start; text-align: left; }
 }
 @media (max-width: 767px) {
+  .aside { font-size: 0.9375rem; }
   .aside { grid-column: 1 / -1; }
   .l1, .l2 { max-width: none; }
   .l4 { grid-row: 4; }

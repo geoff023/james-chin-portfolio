@@ -1,6 +1,7 @@
 /* The cover: a tall section whose stage sticks while the layers move (desktop). */
 .cover {
   --p: 0;
+  --depth: 1; /* how far the layers travel; phones get a gentler version */
   --strip-h: 64px; /* measured in Cover.tsx; the slip floats 14px off the bottom */
   --above-strip: calc(var(--strip-h) + 14px + 2.5vh);
   position: relative;
@@ -33,7 +34,7 @@
   object-position: center 40%;
   -webkit-mask-image: linear-gradient(#000 55%, transparent);
   mask-image: linear-gradient(#000 55%, transparent);
-  translate: 0 calc(var(--p) * -6vh);
+  translate: 0 calc(var(--p) * var(--depth) * -6vh);
   scale: calc(1 + var(--p) * 0.06);
   will-change: translate, scale;
 }
@@ -66,7 +67,7 @@
   letter-spacing: -0.035em;
   white-space: nowrap;
   color: var(--ink);
-  translate: -50% calc(var(--p) * 16vh);
+  translate: -50% calc(var(--p) * var(--depth) * 16vh);
   will-change: translate;
 }
 
@@ -78,7 +79,7 @@
   width: max(150%, 1300px);
   max-width: none;
   height: auto;
-  translate: -50% calc(var(--p) * -26vh);
+  translate: -50% calc(var(--p) * var(--depth) * -26vh);
   will-change: translate;
   filter: drop-shadow(0 -6px 18px rgba(29, 26, 23, 0.12));
 }
@@ -204,14 +205,20 @@
 
 /* phones: the picture is the stage; the flash and order strip follow in the page flow */
 @media (max-width: 767px) {
-  .cover { height: auto; }
+  /* the phone scene is short and scrolls away normally, so full-depth layers slid the hills
+     across the glass within a few hundred pixels; a third of the travel keeps the layering */
+  .cover { height: auto; --depth: 0.3; }
   .stage { position: relative; height: auto; overflow: visible; }
-  .scene { position: relative; height: 88svh; min-height: 560px; overflow: hidden; }
+  /* shorter scene so the issue card starts on the first screen */
+  .scene { position: relative; height: 66svh; min-height: 460px; overflow: hidden; }
   .dateline span:nth-child(2) { display: none; }
   .dateline { top: 56px; }
   .masthead { top: calc(56px + 3.2rem); font-size: 21vw; }
-  .hills { width: 300%; bottom: -14vh; }
-  .glass { right: 50%; translate: 50% 0; bottom: 4vh; width: min(58vw, 260px); }
+  /* parked just low enough to cover the phone's shorter rise (0.3 × 26vh); the ground fade is
+     shortened so it no longer paints over them */
+  .hills { width: 300%; bottom: -8vh; }
+  .ground { height: 12vh; }
+  .glass { right: 50%; translate: 50% 0; bottom: 5vh; width: min(46vw, 210px); }
   .front {
     position: relative;
     inset: auto;

@@ -171,6 +171,7 @@
   .aside > :not(.cup) { grid-column: 2; }
 }
 @media (max-width: 767px) {
+  .small { font-size: 0.9375rem; }
   .title2 { margin-left: 0.4em; }
   .signRow { grid-template-columns: 1fr; }
   .sheet { rotate: 0deg; }

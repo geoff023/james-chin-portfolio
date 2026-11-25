@@ -241,7 +241,12 @@
   .hero { min-height: 0; padding-top: 80px; }
   .cover { grid-column: 2 / 12; }
   .brief { columns: 1; }
-  .decisions { grid-template-columns: 1fr; }
+  .decisions { grid-template-columns: 1fr; gap: 1.75rem; }
+  /* circle beside the label and text, so three decisions don't run three screens long */
+  .decision { grid-template-columns: 72px 1fr; column-gap: 16px; row-gap: 4px; }
+  .decision .disc { grid-row: 1 / span 2; width: 72px; }
+  .decisionLabel { font-size: 1.6rem; align-self: end; }
+  .decision p { grid-column: 2; }
   /* spreads become a swipe row */
   .spreads {
     display: flex;
@@ -250,6 +255,7 @@
     padding: 0 var(--edge) 8px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--edge); /* snap to the page margin, not the screen edge */
     scrollbar-width: none;
   }
   .plate { flex: 0 0 78%; height: 300px; scroll-snap-align: start; }

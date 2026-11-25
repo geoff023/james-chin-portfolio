@@ -82,3 +82,8 @@
   .strip { grid-template-columns: 1fr; row-gap: 10px; }
   .strip .chit { left: auto; right: 0; translate: none; }
 }
+
+/* phones: the hint under the chips at a readable size */
+@media (max-width: 767px) {
+  .gloss { font-size: 0.875rem; }
+}
