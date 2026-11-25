@@ -5,6 +5,14 @@ import * as THREE from 'three'
 import type { Drink } from '../data/order'
 import { Extras } from './Extras'
 
+// @react-three/fiber 9 still creates a THREE.Clock, which three r183+ flags as deprecated on every
+// mount. Nothing to fix on our side, so drop that one warning (remove once fiber moves to Timer).
+const warn = console.warn
+console.warn = (...args: unknown[]) => {
+  if (typeof args[0] === 'string' && args[0].includes('THREE.Clock')) return
+  warn(...args)
+}
+
 const H = 3 // glass height, world units; the glass is centred on the origin
 
 // plan §6 guardrails: cheaper glass on phones, no ripples or sloshing under reduced motion

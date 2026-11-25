@@ -59,7 +59,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                   type="button"
                   className={`label ${s.pour}`}
                   aria-pressed={pressed}
-                  aria-label={`Pour ${it.drink} into the glass`}
+                  aria-label={`Pour it: ${it.drink} into the glass`}
                   onClick={() => onPick(it)}
                 >
                   Pour it

@@ -19,18 +19,29 @@ class KeepPoster extends Component<{ poster: ReactNode; children: ReactNode }, {
   }
 }
 
-// SVG poster paints first, then the 3D glass (three.js, ~270 KB gzip) swaps in once the page has
-// loaded and the main thread is idle, so it never holds up the cover's first paint.
+// SVG poster paints first, then the 3D glass (three.js, ~270 KB gzip) swaps in without a tap:
+// with a mouse, on the first move, scroll or key (instant for a real visitor, and it keeps the
+// compile off the load); on touch screens, a few seconds after load when the main thread is idle.
 export function GlassStage({ drink, label, className }: { drink: Drink; label: string; className?: string }) {
   const [ready, setReady] = useState(false)
   useEffect(() => {
     if (!hasWebGL()) return
+    const show = () => setReady(true)
+
+    if (!matchMedia('(pointer: coarse)').matches) {
+      const events = ['pointermove', 'pointerdown', 'keydown', 'wheel', 'scroll'] as const
+      events.forEach((e) => addEventListener(e, show, { once: true, passive: true }))
+      return () => events.forEach((e) => removeEventListener(e, show))
+    }
+
     let idle = 0
+    let wait = 0
+    // compiling the scene is one long task (about 1 s on a phone): let the cover finish its
+    // entrance first. Safari has no requestIdleCallback.
     const go = () => {
-      // Safari has no requestIdleCallback
-      idle = 'requestIdleCallback' in window
-        ? requestIdleCallback(() => setReady(true), { timeout: 2000 })
-        : setTimeout(() => setReady(true), 300)
+      wait = window.setTimeout(() => {
+        idle = 'requestIdleCallback' in window ? requestIdleCallback(show, { timeout: 2000 }) : setTimeout(show, 300)
+      }, 2500)
     }
     if (document.readyState === 'complete') go()
     else addEventListener('load', go, { once: true })
@@ -38,6 +49,7 @@ export function GlassStage({ drink, label, className }: { drink: Drink; label: s
       removeEventListener('load', go)
       if ('cancelIdleCallback' in window) cancelIdleCallback(idle)
       clearTimeout(idle)
+      clearTimeout(wait)
     }
   }, [])
 

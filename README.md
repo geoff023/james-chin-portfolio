@@ -18,11 +18,10 @@ like an issue of his magazine and is told in his voice:
 - a **layered cover** for the current issue: clouds, the *Kurang Manis* masthead, then hills that
   rise over it as you scroll (depth scrolling), printed as two-ink riso;
 - an **editor's letter** from James, then everything he has published;
-
 - a **running folio** (page number) in the header instead of a progress bar, and a **Contents
   page** instead of a menu;
 - riso-ink colour washes, paper grain and misregistered titles, all tinted by the issue you pick;
-- red-pencil line drawings that sketch themselves in as you read;
+- two-ink line drawings, with the process and numbers drawings sketching themselves in as you read;
 - copy in James's voice: short, specific, a bit dry. *Kurang manis* means "less sweet".
 
 Every person, brand, award and stockist on the site is made up. The drinks are real.
@@ -38,9 +37,9 @@ Every person, brand, award and stockist on the site is made up. The drinks are r
   the whole page.
 - **Case studies** for the four in-print issues, with a page-turn transition between them and a
   **tea-pull toy** on Issue 10 (pull higher and steadier for more foam and a better uncle rating).
-- **Small things:** a "Now serving" line that follows your local time, glossary cards on drink
-  words, a first-visit roller-shutter intro, magnetic stamp buttons, an ink-dot cursor, a letter-
-  shaped contact form with a postage-stamp success state, and a 404 that was too sweet.
+- **Small things:** a page wash tinted by whatever's served at your local hour, glossary cards on
+  drink words, magnetic stamp buttons, a letter-shaped contact form with a postage-stamp success
+  state, and a 404 that was too sweet.
 
 ## Stack
 
@@ -69,22 +68,27 @@ instead, set `VITE_FORM_ENDPOINT` (for example a Formspree URL) before building.
 
 ## Performance & accessibility
 
-Lighthouse on the production build (`npm run preview`, Lighthouse 12):
+Lighthouse 12 on the production build (`npm run preview`):
 
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
-| Home, desktop | 95 | 100 | 100 | 100 |
-| Home, mobile (simulated) | 63–68 | 100 | 100 | 100 |
-| Issue 10, mobile (simulated) | 92 | 100 | 100 | 100 |
+| Home, desktop | 97 | 100 | 100 | 100 |
+| Home, mobile (simulated) | 55 | 100 | 100 | 100 |
+| Issue 10, mobile (simulated) | 87 | 100 | 100 | 100 |
 
-- The 3D glass is code-split and only loads after the visitor first moves, touches, scrolls or
-  presses a key; until then a line-drawn SVG glass stands in (also the fallback with no WebGL).
+Home on a simulated phone is the one trade-off: the 3D glass loads by itself there (no tap), and
+compiling it is a single long task under Lighthouse's 4× CPU throttle. With the glass left as the
+SVG poster, the same page scores in the mid-70s.
+
+- The cover paints first: only the cover renders on load, the rest of the page follows in a React
+  transition, and the hills image is preloaded as the LCP.
+- The 3D glass is code-split and swaps in without a tap: with a mouse on the first move, scroll or
+  key; on touch screens a few seconds after load, when the browser is idle. Until then a line-drawn SVG glass stands in (also the fallback with no WebGL, or if the context fails).
   Phones get fewer transmission samples and a lower-resolution buffer.
-- Home on a simulated phone is held back by first-render cost under 4× CPU throttling with software
-  rendering: the blurred washes, the grain filter and thirteen frosted `backdrop-filter` covers.
-  Unthrottled, the first render is a single ~70 ms task.
-- `prefers-reduced-motion` turns off drift, ripples, sloshing, drawing-in, the shutter and the
-  cursor; the toys still work. Everything is keyboard-reachable (glass and tea pull take the arrow
+- Phones skip the expensive paint: no `backdrop-filter`, still colour washes drawn as radial
+  gradients instead of blurs, a tiled grain image instead of an SVG filter, and 560px drink images.
+- `prefers-reduced-motion` turns off drift, parallax, ripples, sloshing and drawing-in; the toys
+  still work. Everything is keyboard-reachable (glass and tea pull take the arrow
   keys), small red text uses a darker ink that passes AA on every issue tint, and form errors are
   linked to their fields.
 
@@ -92,12 +96,13 @@ Lighthouse on the production build (`npm run preview`, Lighthouse 12):
 
 - Type: Instrument Serif, Pinyon Script, Archivo (variable width) and Nanum Pen Script, self-hosted
   via Fontsource.
-- Portrait of James: red line illustration, cleaned up and recoloured to the site's riso red.
-  _Add how it was made (drawn by hand / AI-assisted and edited)._
-- Line drawings of cups, stools, the cat and friends are drawn in code as SVG and are placeholders
-  for traced illustrations.
-- Case-study spreads currently show sketches; photographs are still to come. When they arrive,
-  set `photo` on each spread in `src/data/caseStudies.ts` and they get a riso duotone automatically.
+- AI-assisted imagery, all edited for the site: the drink photographs on the Shelf, the cover
+  clouds and hills, the commission pieces (festival programme, tote, café menu and cup) and the
+  portrait of James. Each was cropped, colour-graded to the riso palette and given halftone and
+  grain in CSS. _Name the tool you used here._
+- Line drawings (cups, stools, maps, the cat and friends) are drawn by hand in code as two-ink SVG.
+- Case-study spreads use those drawings as plates. To swap in photographs, set `photo` on a spread
+  in `src/data/caseStudies.ts` and it gets a riso duotone automatically.
 - Built with help from Claude Code.
 
 ## Licence
