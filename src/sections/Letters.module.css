@@ -104,6 +104,10 @@
   padding: 2px;
 }
 
+/* text fields have a built-in width (about 20 characters at their font size), which in the
+   large hand font is wider than a phone's sheet and pushed the grid out; let them fill instead */
+.message, .input { width: 100%; min-width: 0; }
+
 .message:focus-visible, .input:focus-visible, .select:focus-visible {
   outline: 2px solid var(--riso-red);
   outline-offset: 4px;
