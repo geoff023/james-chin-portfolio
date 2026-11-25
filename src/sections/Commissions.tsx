@@ -39,7 +39,7 @@ export function Commissions() {
                   <img src={c.image} alt="" loading="lazy" width={1600} height={1200} />
                 ) : c.cutouts ? (
                   // the real pieces, laid on the plate like a flat-lay: programme behind, tote in front
-                  <div className={s.sketches} aria-hidden="true">
+                  <div className={`${s.sketches} ${c.cutoutsTall ? s.tall : ''}`} aria-hidden="true">
                     <img className={`${s.cutout} ${s.cutBack}`} src={c.cutouts[0]} alt="" loading="lazy" decoding="async" />
                     <img className={`${s.cutout} ${s.cutFront}`} src={c.cutouts[1]} alt="" loading="lazy" decoding="async" />
                   </div>

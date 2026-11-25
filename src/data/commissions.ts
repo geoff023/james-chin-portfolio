@@ -11,6 +11,7 @@ export type Commission = {
   tint: string
   image?: string // a single full-bleed photo for the plate
   cutouts?: [back: string, front: string] // or two transparent cut-outs composed on the plate
+  cutoutsTall?: boolean // both pieces portrait-shaped: stand them side by side instead
   page: string
 }
 
@@ -48,6 +49,8 @@ export const commissions: Commission[] = [
     ],
     facts: [['Outlets', '6'], ['Menu', '4 pages to 1'], ['Sleeves a year', '120,000'], ['Items removed', '23']],
     tint: '#F5CB4C',
+    cutouts: ['/images/commissions/toast-menu.webp', '/images/commissions/toast-cup.webp'],
+    cutoutsTall: true,
     page: '27',
   },
 ]

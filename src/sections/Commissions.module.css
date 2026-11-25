@@ -84,13 +84,20 @@
 .plate .cutBack { left: -4%; top: -4%; width: 82%; transform: rotate(-5deg); }
 .plate .cutFront { right: -2%; bottom: 0; width: 38%; transform: rotate(6deg); }
 .spread:hover .cutBack { transform: rotate(-7deg) translateY(-4px); }
+/* two portrait pieces (menu card + cup): menu standing at the back, cup in front of its corner */
+.tall .cutBack { left: 18%; top: -6%; width: auto; height: 108%; transform: rotate(4deg); }
+.tall .cutFront { left: 0; right: auto; bottom: -4%; width: auto; height: 78%; transform: rotate(-4deg); }
+.spread:hover .tall .cutBack { transform: rotate(6deg) translateY(-4px); }
+.spread:hover .tall .cutFront { transform: rotate(-6deg) translateY(-8px); }
 .spread:hover .cutFront { transform: rotate(9deg) translateY(-8px); }
 .spread:hover .sketchB { transform: rotate(8deg) translateY(-6px); }
 .caption {
   position: absolute;
   left: 20px; bottom: 16px;
+  z-index: 3; /* above the cut-outs */
   max-width: 70%;
-  text-transform: none;
+  padding: 3px 7px;
+  background: color-mix(in srgb, #fffdf7 88%, transparent);
   letter-spacing: 0.02em;
   color: var(--ink);
 }
