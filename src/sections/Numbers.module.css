@@ -6,7 +6,7 @@
   transition: background-color 1.2s var(--ease-out);
 }
 
-/* My Forest: bold condensed uppercase heading + small subtitle */
+/* serif heading like the other sections, small subtitle on the right */
 .head {
   display: flex;
   justify-content: space-between;
@@ -16,12 +16,11 @@
   border-bottom: 1px solid var(--hairline);
 }
 .title {
-  font-family: var(--sans);
-  font-stretch: 62%;
-  font-weight: 800;
-  font-size: clamp(1.6rem, 1rem + 2.4vw, 3rem);
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 1.6rem + 6vw, 8.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
 }
 .sub { font-size: 0.8125rem; color: var(--ink-soft); }
 
