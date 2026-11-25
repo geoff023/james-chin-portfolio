@@ -19,20 +19,26 @@ class KeepPoster extends Component<{ poster: ReactNode; children: ReactNode }, {
   }
 }
 
-// SVG poster paints first. The 3D glass (three.js, ~270 KB gzip, seconds of CPU on a phone) only loads
-// once the visitor does something: on desktop any mouse move, scroll or key; on touch screens only a
-// tap on the glass itself, so scrolling past on a phone never pays for it.
+// SVG poster paints first, then the 3D glass (three.js, ~270 KB gzip) swaps in once the page has
+// loaded and the main thread is idle, so it never holds up the cover's first paint.
 export function GlassStage({ drink, label, className }: { drink: Drink; label: string; className?: string }) {
   const [ready, setReady] = useState(false)
   useEffect(() => {
-    if (!hasWebGL() || matchMedia('(pointer: coarse)').matches) return
-    const events = ['pointermove', 'pointerdown', 'touchstart', 'keydown', 'wheel', 'scroll'] as const
+    if (!hasWebGL()) return
+    let idle = 0
     const go = () => {
-      events.forEach((e) => removeEventListener(e, go))
-      setReady(true)
+      // Safari has no requestIdleCallback
+      idle = 'requestIdleCallback' in window
+        ? requestIdleCallback(() => setReady(true), { timeout: 2000 })
+        : setTimeout(() => setReady(true), 300)
     }
-    events.forEach((e) => addEventListener(e, go, { passive: true }))
-    return () => events.forEach((e) => removeEventListener(e, go))
+    if (document.readyState === 'complete') go()
+    else addEventListener('load', go, { once: true })
+    return () => {
+      removeEventListener('load', go)
+      if ('cancelIdleCallback' in window) cancelIdleCallback(idle)
+      clearTimeout(idle)
+    }
   }, [])
 
   const poster = (
@@ -43,10 +49,7 @@ export function GlassStage({ drink, label, className }: { drink: Drink; label: s
   )
 
   return (
-    <div
-      className={className} /* must give it a position (relative/absolute) for the bleed */
-      onPointerDown={ready || !hasWebGL() ? undefined : () => setReady(true)}
-    >
+    <div className={className} /* must give it a position (relative/absolute) for the bleed */>
       {ready ? (
         <KeepPoster poster={poster}>
           <Suspense fallback={poster}>

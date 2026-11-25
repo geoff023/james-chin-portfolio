@@ -160,16 +160,18 @@
 @media (max-width: 1023px) {
   .title { grid-column: 1 / -1; }
   .intro { grid-column: 1 / 10; }
-  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
-}
-
-@media (max-width: 767px) {
-  .facts dt { font-size: 0.8125rem; }
-  .head { grid-template-columns: 1fr; }
-  .intro { grid-column: 1; }
+  /* tablets: a half-width story ran taller than its plate, and the plate's aspect ratio then
+     widened it over the text; stack the pages instead */
   .spread { grid-template-columns: 1fr; }
   .spread::after { display: none; }
   .flip .plate { order: 0; }
   .plate { aspect-ratio: 4 / 3; min-height: 0; }
   .flip .story .pageNo { left: auto; right: 22px; }
+}
+
+@media (max-width: 767px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+  .facts dt { font-size: 0.8125rem; }
+  .head { grid-template-columns: 1fr; }
+  .intro { grid-column: 1; }
 }
