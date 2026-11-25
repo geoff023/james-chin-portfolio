@@ -34,7 +34,7 @@ export function GlassStage({ drink, label, className }: { drink: Drink; label: s
   )
 
   return (
-    <div className={className} style={{ position: 'relative' }}>
+    <div className={className}>{/* className must give it a position (relative/absolute) for the bleed */}
       {ready ? (
         <Suspense fallback={poster}>
           {/* canvas bleeds past the slot so the straw and rim never clip, even mid-tilt */}

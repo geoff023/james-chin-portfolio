@@ -32,13 +32,21 @@ const rows: { name: string; chips: Chip[] }[] = [
 ]
 
 // "Your order, boss?" Tap the code, the glass rebuilds, a chit prints.
-export function OrderBuilder({ order, onChange }: { order: Order | null; onChange: (o: Order) => void }) {
+export function OrderBuilder({
+  order,
+  onChange,
+  layout = 'stack',
+}: {
+  order: Order | null
+  onChange: (o: Order) => void
+  layout?: 'stack' | 'strip' // strip = one band along the cover's bottom edge
+}) {
   const [hint, setHint] = useState<string | null>(null)
   const current = order ?? defaultOrder
   const name = order && orderName(order)
 
   return (
-    <div className={s.builder}>
+    <div className={`${s.builder} ${layout === 'strip' ? s.strip : ''}`}>
       <p className={s.ask}>
         <span className="label">Your order, boss?</span>
       </p>

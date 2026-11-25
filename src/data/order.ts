@@ -8,6 +8,17 @@ export type Order = {
   peng: boolean
 }
 
+// What's in the glass besides the liquid. Each one is a small 3D prop (src/three/Extras.tsx).
+export type Extra =
+  | 'lime' // a lime slice floating at the surface
+  | 'lychee' // peeled lychees, sunk
+  | 'bubbles' // soda fizz rising
+  | 'steam' // hot drink
+  | 'flowers' // dried chrysanthemum heads floating
+  | 'plum' // a salted sour plum at the bottom
+  | 'grains' // barley settled at the bottom
+  | 'powder' // a heap of Milo powder on top
+
 export type Drink = {
   liquid: string // body colour
   milk: string | null // condensed milk settled at the bottom
@@ -15,6 +26,8 @@ export type Drink = {
   foamH: number // 0..1 of the glass height
   ice: boolean
   fill: number // 0..1
+  clear?: number // 0 = cloudy/milky (default), 1 = see-through like soda or water
+  extras?: Extra[]
 }
 
 export const defaultOrder: Order = { base: 'Kopi', milk: '', sugar: '', gau: false, peng: false }
@@ -42,5 +55,6 @@ export function drinkFor(o: Order): Drink {
     foamH: o.base === 'Teh' ? 0.09 : o.milk === 'O' ? 0.015 : 0.035,
     ice: o.peng,
     fill: o.peng ? 0.82 : 0.76,
+    extras: o.peng ? [] : ['steam'], // hot unless you said peng
   }
 }

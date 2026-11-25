@@ -1,6 +1,7 @@
 import { useShared } from '../App'
 import { Commissions } from '../sections/Commissions'
 import { Cover } from '../sections/Cover'
+import { EditorLetter } from '../sections/EditorLetter'
 import { Letters } from '../sections/Letters'
 import { Masthead } from '../sections/Masthead'
 import { Numbers } from '../sections/Numbers'
@@ -14,6 +15,7 @@ export function Home() {
   return (
     <>
       <Cover issue={issue} order={order} onOrder={setOrder} />
+      <EditorLetter />
       <Shelf
         active={order ? null : issue}
         onPick={(i) => {

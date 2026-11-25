@@ -1,68 +1,101 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Misregistered } from '../components/Misregistered'
-import { GlossaryTerm } from '../components/GlossaryTerm'
 import { OrderBuilder } from '../components/OrderBuilder'
 import { currentIssue, type Issue } from '../data/issues'
 import { drinkFor, orderName, type Order } from '../data/order'
 import { GlassStage } from './GlassStage'
 import s from './Cover.module.css'
 
-// The glass pours whatever was ordered last, else the issue picked on the Shelf.
+// The home page opens on the current issue's cover, built in layers that scroll at different speeds:
+// clouds (slowest) → masthead → hills (rise over the masthead) → cover lines, glass, order strip.
+// One scroll-driven CSS variable (--p, 0..1) moves them all.
 export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | null; onOrder: (o: Order) => void }) {
+  const ref = useRef<HTMLElement>(null)
   const drink = order ? drinkFor(order) : issue.glass
   const label = order
     ? `A glass of ${orderName(order)}`
     : `A glass of ${issue.drink.toLowerCase()}, ${issue.drinkEn}`
 
+  useEffect(() => {
+    const el = ref.current!
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.setProperty('--p', '0.3') // a still, layered cover
+      return
+    }
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const r = el.getBoundingClientRect()
+      const run = Math.max(1, r.height - innerHeight * 0.6)
+      el.style.setProperty('--p', Math.min(1, Math.max(0, -r.top / run)).toFixed(4))
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    onScroll()
+    addEventListener('scroll', onScroll, { passive: true })
+    addEventListener('resize', onScroll)
+    return () => {
+      removeEventListener('scroll', onScroll)
+      removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
-    <section id="cover" data-folio="01" className={s.cover} aria-labelledby="cover-title">
-      <div className={`label ${s.dateline}`}>
-        <span>Portfolio</span>
-        <span>Creative direction · Editorial design · Print</span>
-        <span>Ipoh / Kuala Lumpur</span>
+    <section ref={ref} id="cover" data-folio="01" className={s.cover} aria-labelledby="cover-title">
+      <div className={s.stage}>
+        <div className={s.scene}>
+          <div className={s.sky} aria-hidden="true" />
+          <img className={s.clouds} src="/images/cover/clouds.webp" alt="" width={1199} height={430} fetchPriority="high" />
+          <div className={`label ${s.dateline}`}>
+            <span>Vol. 07 · No. {currentIssue.no}</span>
+            <span>A quarterly about what Southeast Asia drinks</span>
+            <span>Nov 2026 · RM 28</span>
+          </div>
+          <h1 id="cover-title" className={s.masthead}>
+            <Misregistered>Kurang Manis</Misregistered>
+            <span className="visually-hidden">, the magazine James Chin started and still makes</span>
+          </h1>
+          <img className={s.hills} src="/images/cover/hills.webp" alt="" width={1199} height={281} />
+          <div className={s.ground} aria-hidden="true" />
+          <div className={s.halftone} aria-hidden="true" />
+
+          <GlassStage className={s.glass} drink={drink} label={label} />
+          <p className={`hand ${s.hint}`} aria-hidden="true">
+            go on, tilt it
+            <svg viewBox="0 0 80 60" className={s.arrow}>
+              <path pathLength="1" d="M4 50c20 0 42-10 56-40" />
+              <path pathLength="1" d="M47 14l13-4 3 13" />
+            </svg>
+          </p>
+        </div>
+
+        <div className={s.front}>
+          {/* cover flash: the issue, then who makes it */}
+          <div className={s.flash}>
+            <p className={`label ${s.flashKicker}`}>Issue {currentIssue.no} · Out now</p>
+            <Link to={`/issues/${currentIssue.slug}`} viewTransition className={s.flashTitle}>
+              <Misregistered>{currentIssue.title}</Misregistered>
+            </Link>
+            <p className={s.flashDrink}>{currentIssue.drink}, <i>{currentIssue.drinkEn}</i></p>
+            <hr className={s.flashRule} />
+            <p className={`label ${s.byline}`}>James Chin, founder &amp; editor</p>
+            <p className={s.oneLiner}>
+              I started <em>Kurang Manis</em> in 2019, a print quarterly about what Southeast Asia
+              drinks. I still make every issue: I pick the drink, edit the words, design the pages
+              and drive the boxes.
+            </p>
+            <p className={s.ctas}>
+              <a href="#shelf" className={`label ${s.cta}`}>Read the issues ↓</a>
+              <a href="#letters" className={`label ${s.ctaGhost}`}>Write to the editor</a>
+            </p>
+          </div>
+
+          <div className={s.strip}>
+            <OrderBuilder order={order} onChange={onOrder} layout="strip" />
+          </div>
+        </div>
       </div>
-
-      <h1 id="cover-title" className={s.wordmark}>
-        <Misregistered className={s.line1}>
-          <span className={s.swash}>J</span>ames
-        </Misregistered>
-        <Misregistered className={s.line2}>Chin.</Misregistered>
-      </h1>
-
-      <div className={s.intro}>
-        <p>
-          Founder and creative director of <em>Kurang Manis</em>, a print quarterly about what
-          Southeast Asia drinks. One drink per issue, three thousand copies, read on <GlossaryTerm word="kopitiam" /> tables.
-        </p>
-        <p>Also makes menus, identities and festival programmes for people who sell drinks.</p>
-        <a href="#letters" className={`label ${s.cta}`}>Taking commissions for 2027 ↘</a>
-      </div>
-
-      <GlassStage className={s.glass} drink={drink} label={label} />
-
-      <div className={s.order}>
-        <OrderBuilder order={order} onChange={onOrder} />
-      </div>
-
-      <p className={`hand ${s.hint}`} aria-hidden="true">
-        go on, tilt it
-        <svg viewBox="0 0 80 60" className={s.arrow}>
-          <path pathLength="1" d="M4 50c20 0 42-10 56-40" />
-          <path pathLength="1" d="M47 14l13-4 3 13" />
-        </svg>
-      </p>
-
-      <p className={s.coverline}>
-        <span className="label">Latest work · Kurang Manis, Issue {currentIssue.no}</span>
-        <Link to={`/issues/${currentIssue.slug}`} viewTransition className={s.issueLink}>
-          <Misregistered as="span" className={s.issueTitle}>{currentIssue.title}</Misregistered>
-        </Link>
-        <span className={s.issueDrink}>
-          {currentIssue.drink}, <i>{currentIssue.drinkEn}</i>
-        </span>
-      </p>
-
-      <span className={`label ${s.folio}`} aria-hidden="true">01</span>
     </section>
   )
 }

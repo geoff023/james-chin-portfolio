@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows, Environment, Lightformer, MeshTransmissionMaterial, RoundedBox } from '@react-three/drei'
 import * as THREE from 'three'
 import type { Drink } from '../data/order'
+import { Extras } from './Extras'
 
 const H = 3 // glass height, world units; the glass is centred on the origin
 
@@ -44,6 +45,7 @@ const liquidFrag = /* glsl */ `
   uniform float uMilkOn;
   uniform vec3 uFoam;
   uniform float uFoamH;
+  uniform float uClear;
   varying vec3 vWorld;
   varying vec3 vNormal;
   varying float vLocalY;
@@ -62,7 +64,8 @@ const liquidFrag = /* glsl */ `
     // light passes through less liquid at the edges: clearer and brighter there
     vec3 col = mix(uLiquid * 1.35, uLiquid * 0.72, smoothstep(0.15, 0.95, facing));
     col *= mix(0.82, 1.05, vLocalY);
-    float alpha = mix(0.62, 0.9, facing);
+    // clear drinks (soda, water, tea) let you see what's floating in them
+    float alpha = mix(mix(0.62, 0.9, facing), mix(0.14, 0.32, facing), uClear);
 
     float milkLine = 0.16 + 0.03 * sin(vWorld.x * 6.0 + vWorld.z * 4.0 + uTime * 0.4);
     float milk = uMilkOn * smoothstep(milkLine + 0.05, milkLine - 0.05, vLocalY);
@@ -113,6 +116,7 @@ function makeLiquidMaterial(d: Drink) {
       uMilkOn: { value: d.milk ? 1 : 0 },
       uFoam: { value: new THREE.Color(d.foam) },
       uFoamH: { value: d.foamH },
+      uClear: { value: d.clear ?? 0 },
     },
   })
 }
@@ -128,11 +132,14 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
     wobbleAmp: new THREE.Vector2(),
     fill: drink.fill,
     foamH: drink.foamH,
+    clear: drink.clear ?? 0,
     milkOn: drink.milk ? 1 : 0,
     ice: drink.ice ? 1 : 0,
     t: 0,
   })
   const tmp = useMemo(() => ({ c: new THREE.Color(), prev: new THREE.Vector2(), target: new THREE.Vector2() }), [])
+  // where the liquid surface is right now, for the props that float on it or sit under it
+  const surf = useMemo(() => () => -H / 2 + state.current.fill * H, [])
 
   const straw = useMemo(
     () =>
@@ -183,6 +190,8 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
     const surf = -H / 2 + s.fill * H
     u.uSurface.value = surf
     u.uFoamH.value = s.foamH
+    s.clear += ((drink.clear ?? 0) - s.clear) * k
+    u.uClear.value = s.clear
     u.uMilkOn.value = s.milkOn
     u.uLiquid.value.lerp(tmp.c.set(drink.liquid), k)
     u.uFoam.value.lerp(tmp.c.set(drink.foam), k)
@@ -210,6 +219,7 @@ function Glass({ drink, input }: { drink: Drink; input: Input }) {
           </RoundedBox>
         ))}
       </group>
+      <Extras extras={drink.extras} surf={surf} />
       <mesh geometry={straw}>
         <meshPhysicalMaterial color="#E5432F" roughness={0.35} clearcoat={0.6} />
       </mesh>

@@ -46,7 +46,7 @@ export default function IssuePage() {
     setIssue(issue)
     setOrder(null)
     document.title = `${issue.title}: Kurang Manis, Issue ${issue.no} — James Chin`
-    return () => { document.title = 'James Chin — Creative Director, Kurang Manis' }
+    return () => { document.title = 'James Chin — Founder & Editor, Kurang Manis' }
   }, [issue, setIssue, setOrder])
 
   if (!issue || !cs) return <NotFound />
@@ -76,7 +76,12 @@ export default function IssuePage() {
           <span>p. {pg(cs.page, 2)}</span>
         </div>
         <div className={s.briefRow}>
-          <p className={s.brief}>{cs.brief}</p>
+          {/* a real span for the drop cap: Chrome drops ::first-letter floats into column two of a multicol box */}
+          <p className={s.brief}>
+            <span className={s.cap} aria-hidden="true">{cs.brief[0]}</span>
+            <span className="visually-hidden">{cs.brief[0]}</span>
+            {cs.brief.slice(1)}
+          </p>
           <p className={`hand ${s.note}`}>
             <svg viewBox="0 0 60 40" className={s.noteArrow} aria-hidden="true">
               <path d="M56 6c-16 2-36 10-48 26" />
@@ -86,6 +91,20 @@ export default function IssuePage() {
             <span className={s.noteSign}>— J.</span>
           </p>
         </div>
+        <dl className={s.roleRow}>
+          <div>
+            <dt className="label">My role</dt>
+            <dd>
+              <ul className={s.roles}>
+                {cs.role.map((r) => <li key={r}>{r}</li>)}
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt className="label">What happened</dt>
+            <dd className={s.outcome}>{cs.outcome}</dd>
+          </div>
+        </dl>
       </section>
 
       <section className={s.block} data-folio={pg(cs.page, 4)} aria-labelledby="decisions">

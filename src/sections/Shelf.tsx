@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { Misregistered } from '../components/Misregistered'
 import { issues, type Issue } from '../data/issues'
-import { GlassPoster } from './GlassPoster'
 import s from './Shelf.module.css'
 
 // Every issue as a frosted cover. Picking one pours it into the glass on the cover.
@@ -21,7 +20,8 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
           <Misregistered>The Shelf</Misregistered>
         </h2>
         <p className={s.intro}>
-          One drink per issue since 2019. Pick a cover and it gets poured into the glass up top.
+          Everything I’ve published since 2019, one drink each. Pick a cover and I’ll pour it into
+          the glass up top.
         </p>
         {active && active.no !== issues[0].no && (
           <a href="#cover" className={`hand ${s.poured}`}>
@@ -34,7 +34,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
         {issues.map((it, i) => {
           const pressed = active?.no === it.no
           return (
-            <li key={it.no} className={i === 0 ? s.big : undefined}>
+            <li key={it.no} className={i < 2 ? s.big : undefined}>{/* this issue + last issue lead */}
               <button
                 type="button"
                 className={s.card}
@@ -43,7 +43,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                 onClick={() => onPick(it)}
               >
                 <span className={s.art} aria-hidden="true">
-                  <GlassPoster liquid={it.glass.liquid} ice={it.glass.ice} />
+                  <img src={`/images/drinks/${it.no}.webp`} alt="" width={900} height={1125} loading="lazy" decoding="async" />
                 </span>
                 <span className={s.frost} aria-hidden="true" />
                 {/* the visible text is the button's name (WCAG 2.5.3), plus a hidden hint */}

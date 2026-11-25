@@ -1,7 +1,8 @@
 # Kurang Manis: the portfolio of James Chin
 
-A portfolio for James Chin, the (fictional) creative director of *Kurang Manis*, an independent
-print quarterly about what Southeast Asia drinks. One drink per issue. Tilt the glass.
+James Chin (fictional) started *Kurang Manis* in 2019, a print quarterly about what Southeast Asia
+drinks, and still makes every issue himself: he picks the drink, edits the words, designs the pages
+and drives the boxes. This is his site, built like an issue of his magazine. Tilt the glass.
 
 **Live:** _add the Vercel URL here after deploying_
 
@@ -9,9 +10,14 @@ print quarterly about what Southeast Asia drinks. One drink per issue. Tilt the 
 
 ## Concept
 
-James grew up above his parents' kopitiam in Ipoh and now makes a magazine where every issue is
-about one drink, from kopi O to bandung. So the site behaves like one of his magazines rather than
-a website about one:
+James grew up above his parents' kopitiam in Ipoh, spent six years designing hotel menus in
+Singapore, then left to start a magazine where every issue is about one drink, from kopi O to teh O
+in the highlands. His design studio work (the commissions) pays for the printing. So the site opens
+like an issue of his magazine and is told in his voice:
+
+- a **layered cover** for the current issue: clouds, the *Kurang Manis* masthead, then hills that
+  rise over it as you scroll (depth scrolling), printed as two-ink riso;
+- an **editor's letter** from James, then everything he has published;
 
 - a **running folio** (page number) in the header instead of a progress bar, and a **Contents
   page** instead of a menu;

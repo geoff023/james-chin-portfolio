@@ -58,7 +58,7 @@ export function Header() {
       <p className={`label ${s.folio}`}>
         <Link to="/" viewTransition className={s.name}>James Chin</Link>
         <span className={s.issue}>
-          <span className={s.sep}>—</span> Kurang Manis, Issue {shown.no}
+          <span className={s.sep}>—</span> {slug ? `Kurang Manis, Issue ${shown.no}` : 'Founder, Kurang Manis'}
         </span>
         <span className={s.sep}>—</span>
         <span>p. <span key={page} className={s.page}>{page}</span></span>

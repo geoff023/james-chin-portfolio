@@ -7,7 +7,7 @@ import s from './NotFound.module.css'
 export function NotFound() {
   useEffect(() => {
     document.title = 'Too sweet. Sent back. — James Chin'
-    return () => { document.title = 'James Chin — Creative Director, Kurang Manis' }
+    return () => { document.title = 'James Chin — Founder & Editor, Kurang Manis' }
   }, [])
 
   return (

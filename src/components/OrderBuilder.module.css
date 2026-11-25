@@ -67,3 +67,18 @@
   from { clip-path: inset(100% 0 0 0); transform: translateY(14px); }
   to { clip-path: inset(0); transform: none; }
 }
+
+/* strip: one horizontal band (cover bottom edge); groups sit side by side, chit prints upward */
+.strip {
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 26ch);
+  align-items: center;
+  column-gap: 20px;
+}
+.strip .rows { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.strip .row { flex-wrap: nowrap; }
+.strip .gloss { min-height: 0; margin: 0; }
+.strip .chit { right: auto; left: 50%; translate: -50% 0; }
+@media (max-width: 1023px) {
+  .strip { grid-template-columns: 1fr; row-gap: 10px; }
+  .strip .chit { left: auto; right: 0; translate: none; }
+}

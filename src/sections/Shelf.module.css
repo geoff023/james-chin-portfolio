@@ -56,7 +56,7 @@
   gap: clamp(1.5rem, 2.4vw, 2.25rem) var(--gutter);
 }
 .grid li { display: flex; flex-direction: column; min-width: 0; }
-.big { grid-column: span 2; grid-row: span 2; }
+.big { grid-column: span 2; } /* this issue + last issue, side by side on the first row */
 
 /* a cover: tinted paper, the drink, frosted glass over its lower two-thirds */
 .card {
@@ -71,15 +71,15 @@
   box-shadow: 0 1px 0 rgba(29, 26, 23, 0.06), 0 18px 30px -24px rgba(29, 26, 23, 0.6);
   transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
 }
-.big .card { flex: 1; aspect-ratio: auto; min-height: 100%; }
+.big .card { aspect-ratio: 1 / 1; }
 
 .art {
   position: absolute;
-  inset: 10% 14% 7%;
+  inset: 0;
   transition: transform 0.8s var(--ease-out);
 }
-.art svg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
-.big .art { inset: 9% 20% 22%; }
+/* the drink photo fills the cover; its own background is the issue tint */
+.art img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
 
 .frost {
   position: absolute;
@@ -97,6 +97,10 @@
 .meta {
   position: absolute;
   left: 0; right: 0; bottom: 0;
+  /* own stacking layer, so the z-index:-1 gradient below stays in front of the photo
+     (without it the gradient only shows while opacity < 1, then drops behind the image) */
+  z-index: 1;
+  isolation: isolate;
   display: grid;
   gap: 4px;
   padding: 16px;
@@ -190,8 +194,7 @@
 /* tablet: two columns, current issue runs full width */
 @media (max-width: 1279px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .big { grid-row: auto; }
-  .big .card { aspect-ratio: 16 / 11; min-height: 0; }
+  .big .card { aspect-ratio: 16 / 11; }
   .intro, .poured { grid-column: 8 / 13; }
 }
 

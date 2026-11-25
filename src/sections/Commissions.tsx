@@ -15,17 +15,17 @@ export function Commissions() {
   return (
     <section id="commissions" data-folio="24" className={s.commissions} aria-labelledby="commissions-title">
       <div className={`label ${s.rule}`}>
-        <span>04 — Commissions</span>
-        <span>For people who sell drinks</span>
+        <span>04 — The studio side</span>
+        <span>How the magazine pays for itself</span>
       </div>
 
       <div className={s.head}>
         <h2 id="commissions-title" className={s.title}>
-          <Misregistered>Commissions</Misregistered>
+          <Misregistered>The Studio Side</Misregistered>
         </h2>
         <p className={s.intro}>
-          Between issues, James art-directs for cafés, drink brands and festivals. Same rule as the
-          magazine: less sweet.
+          Between issues I art-direct for cafés, drink brands and festivals. It pays for the
+          printing, and the rule is the same as the magazine’s: less sweet.
         </p>
       </div>
 

@@ -9,17 +9,17 @@ import s from './Process.module.css'
 const steps: { title: string; short: string; body: ReactNode; note: string; Art: ComponentType<{ className?: string }> }[] = [
   {
     title: 'The Drink', short: 'Pick one. Argue for a month.',
-    body: 'Four of us, one table, a month of arguing about which drink gets the next issue. The argument is the research: whoever loses has to find out why they were wrong.',
+    body: 'Four of us, one table, a month of arguing about which drink gets the next issue. I get the deciding vote, and the blame. Whoever loses has to find out why they were wrong.',
     note: 'bandung won 3–1', Art: TwoCups,
   },
   {
     title: 'Tasting Trip', short: 'Two weeks, a notebook, a film camera.',
-    body: 'Two weeks on the road from Ipoh to wherever the drink is best. Every stall gets the same order, written down before it arrives and again after.',
+    body: 'Two weeks on the road from Ipoh to wherever the drink is best. I order the same thing at every stall and write it down twice: before it arrives, and after.',
     note: '47 glasses. 2 regrets.', Art: MapPin,
   },
   {
     title: 'Interviews', short: 'Owners, regulars, the uncle with opinions.',
-    body: <>Stall owners, the regulars at 6am, and the one uncle at every <GlossaryTerm word="kopitiam">shop</GlossaryTerm> who has opinions. We record everything and print the parts nobody would put on a menu.</>,
+    body: <>Stall owners, the regulars at 6am, and the one uncle at every <GlossaryTerm word="kopitiam">shop</GlossaryTerm> who has opinions. I record everything and print the parts nobody would put on a menu.</>,
     note: 'mostly the uncle', Art: Bubbles,
   },
   {
@@ -28,13 +28,13 @@ const steps: { title: string; short: string; body: ReactNode; note: string; Art:
     note: '36 frames, 1 keeper', Art: FilmCamera,
   },
   {
-    title: 'Layout', short: 'Twelve columns, broken on purpose.',
-    body: 'Every spread starts on a 12-column grid, then gets broken wherever the story needs room: a photo bleeding off, a pull quote in the gutter, a fold-out for the pour.',
+    title: 'Layout', short: 'I set every page. Twelve columns, broken on purpose.',
+    body: 'I lay out every spread myself, on a 12-column grid, then break it wherever the story needs room: a photo bleeding off, a pull quote in the gutter, a fold-out for the pour.',
     note: 'the grid is a suggestion', Art: GridPage,
   },
   {
     title: 'Press', short: 'Riso and offset. Folded by hand.',
-    body: <>Covers on the riso, insides offset at a print shop in Ipoh. Folded by hand on the shop floor and delivered by <GlossaryTerm word="Myvi" /> to every stockist we can drive to.</>,
+    body: <>Covers on the riso, insides offset at a print shop in Ipoh. Folded by hand on the shop floor, then I drive them in a <GlossaryTerm word="Myvi" /> to every stockist I can reach.</>,
     note: 'the boot fits 400 copies', Art: Myvi,
   },
 ]
@@ -73,19 +73,19 @@ export function Process() {
   return (
     <section id="process" data-folio="16" ref={section} className={s.process} aria-labelledby="process-title">
       <div className={`label ${s.rule}`}>
-        <span>03 — How an issue gets made</span>
+        <span>03 — How I make an issue</span>
         <span>Six steps, about four months</span>
       </div>
 
       <div className={s.head}>
         <h2 id="process-title" className={s.title}>
           <Misregistered>
-            <span className={s.swash}>H</span>ow an Issue
+            <span className={s.swash}>H</span>ow I Make
           </Misregistered>
-          <Misregistered className={s.title2}>Gets Made</Misregistered>
+          <Misregistered className={s.title2}>an Issue</Misregistered>
         </h2>
         <p className={s.intro}>
-          Every issue starts the same way: someone orders a drink and won’t stop talking about it.
+          Every issue starts the same way: someone orders a drink and won’t stop talking about it. Usually me.
         </p>
         <Kettle className={s.kettle} />
       </div>

@@ -7,7 +7,7 @@ export function Statement() {
   return (
     <section id="statement" data-folio="12" className={s.statement} aria-label="What Kurang Manis is about">
       <div className={`label ${s.rule}`}>
-        <span>— On sugar</span>
+        <span>— Why it’s called less sweet</span>
         <span>The magazine’s one rule</span>
       </div>
 
@@ -19,8 +19,8 @@ export function Statement() {
           <span className={s.l4}>More honest.</span>
         </p>
         <p className={s.aside}>
-          It’s how Malaysians order: <GlossaryTerm word="kurang manis" />, less sugar, please. It
-          became the magazine’s one editorial rule. Warm, a bit dry, never sugary.
+          It’s how Malaysians order: <GlossaryTerm word="kurang manis" />, less sugar, please. I made
+          it the magazine’s one editorial rule. Warm, a bit dry, never sugary.
         </p>
       </div>
 

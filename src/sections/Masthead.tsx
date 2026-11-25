@@ -3,21 +3,33 @@ import { GlossaryTerm } from '../components/GlossaryTerm'
 import { Misregistered } from '../components/Misregistered'
 import s from './Masthead.module.css'
 
+// The masthead page: reference, not story (the story is in the editor's letter).
+// Credits set like a real masthead: role, dotted leader, name. All names and awards are fictional.
+
 const drinking = ['Kopi C kosong', 'Teh O ais limau', 'Barley ais, no sugar', 'Kopi O gau', 'Bandung, for research']
 
-// credits set like a real masthead: role, dotted leader, name. All names and awards are fictional.
-const credits: { heading: string; rows: [string, string][] }[] = [
-  {
-    heading: 'Masthead',
-    rows: [
-      ['Founder & creative director', 'James Chin'],
-      ['Managing editor', 'Nur Aisyah Rahim'],
-      ['Photography', 'Lim Wei Han'],
-      ['Production & distribution', 'Raj Kumar'],
-      ['Contributors', 'A rotating cast'],
-      ['Shop cat', 'Ah Boy'],
-    ],
-  },
+const team: [string, string][] = [
+  ['Founder & editor', 'James Chin'],
+  ['Managing editor', 'Nur Aisyah Rahim'],
+  ['Photography', 'Lim Wei Han'],
+  ['Production & distribution', 'Raj Kumar'],
+  ['Contributors', 'A rotating cast, mostly people who disagreed with us'],
+  ['Printed by', 'A riso shop and an offset press, Ipoh'],
+  ['Delivered by', 'One Myvi'],
+  ['Shop cat', 'Ah Boy'],
+]
+
+const timeline: [string, React.ReactNode][] = [
+  ['1991', <>Born in Ipoh, above his parents’ <GlossaryTerm word="kopitiam" /></>],
+  ['2009–13', 'Graphic communication, Kuala Lumpur'],
+  ['2013–19', 'Hotel menus and bank annual reports, a branding agency in Singapore'],
+  ['2019', 'Issue 00: sixteen riso pages about his father’s shop, 200 copies left on tables'],
+  ['2020', <><i>Kurang Manis</i> goes quarterly. One drink per issue.</>],
+  ['2024', 'Best Debut Series, Asia Indie Print Fair'],
+  ['2026', <>Issue 13, <i>Above the Clouds</i>. Largest run yet.</>],
+]
+
+const lists: { heading: string; rows: [string, string][] }[] = [
   {
     heading: 'Recognition',
     rows: [
@@ -36,6 +48,16 @@ const credits: { heading: string; rows: [string, string][] }[] = [
   },
 ]
 
+function Credit({ role, children }: { role: string; children: React.ReactNode }) {
+  return (
+    <div className={s.row}>
+      <dt className={s.role}>{role}</dt>
+      <span className={s.leader} aria-hidden="true" />
+      <dd className={s.name}>{children}</dd>
+    </div>
+  )
+}
+
 export function Masthead() {
   const [n, setN] = useState(0)
   useEffect(() => {
@@ -47,7 +69,7 @@ export function Masthead() {
     <section id="masthead" data-folio="30" className={s.masthead} aria-labelledby="masthead-title">
       <div className={`label ${s.rule}`}>
         <span>05 — Masthead</span>
-        <span>Four people and a cat</span>
+        <span>The people I make it with</span>
       </div>
 
       <h2 id="masthead-title" className={s.title}>
@@ -56,60 +78,43 @@ export function Masthead() {
         </Misregistered>
       </h2>
 
-      <div className={s.spread}>
-        <div className={s.colA}>
-          <p className={s.dropcap}>
-            I grew up above my parents’ <GlossaryTerm word="kopitiam" /> in Ipoh, drawing on the backs
-            of order chits while the uncles argued about football.
-          </p>
-          <p>
-            I studied graphic communication in KL, then spent six years in Singapore designing hotel
-            menus and bank annual reports. I was good at it. I was also bored.
-          </p>
+      <div className={s.page}>
+        <div className={s.team}>
+          <h3 className={`label ${s.groupHead}`}>This issue, the people</h3>
+          <dl className={s.list}>
+            {team.map(([role, name], i) => (
+              <Credit key={role} role={role}>
+                {name}
+                {i === 0 && (
+                  <span className={s.drinking}>
+                    <span className="label">currently drinking</span>{' '}
+                    <span key={n} className={`hand ${s.drink}`}>{drinking[n]}</span>
+                  </span>
+                )}
+              </Credit>
+            ))}
+          </dl>
         </div>
 
-        <figure className={s.portrait}>
-          <img
-            src="/illustrations/james.webp"
-            alt="Red pencil line drawing of James, in round glasses with a pen tucked behind his ear, reading a proof."
-            width={900}
-            height={834}
-            loading="lazy"
-            decoding="async"
-            className={s.portraitArt}
-          />
-          <figcaption className={s.drinking}>
-            <span className="label">Currently drinking</span>
-            <span key={n} className={`hand ${s.drink}`}>{drinking[n]}</span>
-          </figcaption>
-        </figure>
-
-        <div className={s.colB}>
-          <p>
-            In 2019 I riso-printed sixteen pages about my father’s shop and left 200 copies on tables
-            around Ipoh. People kept them.
-          </p>
-          <p>
-            A year later it was a quarterly: one drink per issue, three thousand copies, stocked from
-            Penang to Tokyo. We are four people, a rotating cast of contributors, and a cat.
-            I still order it <GlossaryTerm word="kurang manis" />.
-          </p>
-          <p className={`hand ${s.sign}`} aria-hidden="true">— James</p>
+        <div className={s.brief}>
+          <h3 className={`label ${s.groupHead}`}>James, in brief</h3>
+          <ol className={s.timeline}>
+            {timeline.map(([year, what]) => (
+              <li key={year}>
+                <span className={s.year}>{year}</span>
+                <span className={s.what}>{what}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
 
-      <div className={s.credits}>
-        {credits.map((g) => (
-          <div key={g.heading} className={s.group}>
+      <div className={s.lists}>
+        {lists.map((g) => (
+          <div key={g.heading}>
             <h3 className={`label ${s.groupHead}`}>{g.heading}</h3>
-            <dl>
-              {g.rows.map(([role, name]) => (
-                <div key={role} className={s.row}>
-                  <dt className={s.role}>{role}</dt>
-                  <span className={s.leader} aria-hidden="true" />
-                  <dd className={s.name}>{name}</dd>
-                </div>
-              ))}
+            <dl className={s.list}>
+              {g.rows.map(([role, name]) => <Credit key={role} role={role}>{name}</Credit>)}
             </dl>
           </div>
         ))}

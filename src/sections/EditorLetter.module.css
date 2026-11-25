@@ -1,0 +1,74 @@
+.letter {
+  position: relative;
+  padding: clamp(9rem, 14vw, 12rem) var(--edge) clamp(4rem, 8vw, 7rem);
+  /* picks up the cover's hill green and lets it settle into paper */
+  background: linear-gradient(to bottom, var(--hill) 0, color-mix(in srgb, var(--hill) 35%, var(--paper)) 3.5rem, var(--paper) clamp(8rem, 12vw, 10.5rem));
+}
+@media (max-width: 767px) {
+  .letter { padding-top: clamp(4rem, 9vw, 6rem); background: var(--paper); } /* phones already fade under the cover */
+}
+
+.rule {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--hairline);
+  color: var(--ink-soft);
+}
+
+.page {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.side { grid-column: 1 / 4; margin: 0; display: grid; gap: 10px; position: sticky; top: 90px; }
+.side img { width: 100%; height: auto; }
+.side figcaption { color: var(--ink-soft); }
+
+.body { grid-column: 5 / 13; display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+.title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3rem, 1.6rem + 5vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.columns {
+  columns: 2;
+  column-gap: calc(var(--gutter) * 2);
+  font-size: var(--step-0);
+  line-height: 1.7;
+}
+.columns p { margin-bottom: 1em; break-inside: avoid-column; }
+.lede::first-letter {
+  float: left;
+  margin: 0.05em 0.08em 0 0;
+  font-family: var(--serif);
+  font-size: 4.4em;
+  line-height: 0.78;
+  color: var(--riso-red);
+}
+
+.sign { display: grid; justify-items: start; gap: 2px; }
+.signHand { font-size: 1.7rem; color: var(--ink); }
+.signName { font-size: 3rem; color: var(--riso-red-ink); transform: rotate(-4deg); margin: -4px 0 6px 1.2rem; }
+.sign .label { color: var(--ink-soft); }
+
+.folio { position: absolute; right: var(--edge); bottom: 1.5rem; color: var(--ink-soft); }
+
+@media (max-width: 1023px) {
+  .side { grid-column: 1 / 5; position: static; }
+  .body { grid-column: 5 / 13; }
+}
+@media (max-width: 767px) {
+  .page { grid-template-columns: 1fr; row-gap: 2rem; }
+  .side, .body { grid-column: 1; }
+  .side { width: 70%; }
+  .columns { columns: 1; }
+}
