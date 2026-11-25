@@ -3,14 +3,6 @@
   padding: var(--section-pad) var(--edge) clamp(5rem, 9vw, 8rem);
 }
 
-.rule {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 10px;
-  border-top: 1px solid var(--hairline);
-  color: var(--ink-soft);
-}
 
 .title {
   margin: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2.5rem, 5vw, 4rem);

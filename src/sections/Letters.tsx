@@ -63,16 +63,12 @@ export function Letters() {
 
   return (
     <section id="letters" data-folio="34" className={s.letters} aria-labelledby="letters-title">
-      <div className={`label ${s.rule}`}>
-        <span>06 — Letters to the Editor</span>
-        <span>Replies within a week</span>
-      </div>
 
       <h2 id="letters-title" className={s.title}>
         <Misregistered>
           <span className={s.swash}>L</span>etters
         </Misregistered>
-        <Misregistered className={s.title2}>to the Editor</Misregistered>
+        <span className={s.title2}>to the Editor</span>
       </h2>
 
       <div className={s.layout}>
@@ -138,7 +134,7 @@ export function Letters() {
           <a href={`mailto:${EMAIL}`} className={s.mail}>{EMAIL}</a>
           <p className={s.small}>
             Commissions, stockists, a drink we haven’t covered yet, or a correction about how your
-            grandmother made it. All welcome.
+            grandmother made it. All welcome, and I reply within a week.
           </p>
           <KopiCup className={s.cup} />
         </aside>
@@ -179,7 +175,7 @@ function Stamp() {
         <path d="M18 86c10 8 74 8 84 0" />
       </g>
       <text x="80" y="150" textAnchor="middle" fontFamily="var(--sans)" fontSize="13" fontWeight="700" letterSpacing="2" fill="var(--riso-red-ink)">RECEIVED</text>
-      <text x="80" y="166" textAnchor="middle" fontFamily="var(--sans)" fontSize="9" letterSpacing="1.5" fill="var(--ink-soft)">KURANG MANIS · RM 0</text>
+      <text x="80" y="166" textAnchor="middle" fontFamily="var(--sans)" fontSize="9" letterSpacing="1.5" fill="var(--ink-soft)">KURANG MANIS  RM 0</text>
     </svg>
   )
 }

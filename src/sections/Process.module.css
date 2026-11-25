@@ -4,14 +4,6 @@
   --p: 0;
 }
 
-.rule {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 10px;
-  border-top: 1px solid var(--hairline);
-  color: var(--ink-soft);
-}
 
 .head {
   position: relative;

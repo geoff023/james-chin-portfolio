@@ -80,7 +80,7 @@ export function OrderBuilder({
 
       {name && (
         <div key={name} className={s.chit} role="status">
-          <span className="label">Table 4 · {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <span className="label">Table 4, {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
           <span className={s.chitOrder}>{name} ×1</span>
         </div>
       )}

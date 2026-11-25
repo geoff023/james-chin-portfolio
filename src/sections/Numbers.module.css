@@ -21,8 +21,7 @@
   font-weight: 800;
   font-size: clamp(1.6rem, 1rem + 2.4vw, 3rem);
   line-height: 1;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
 }
 .sub { font-size: 0.8125rem; color: var(--ink-soft); }
 
@@ -75,8 +74,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   font-stretch: 70%;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 .statSub {
   display: block;

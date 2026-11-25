@@ -32,7 +32,7 @@ export function Footer() {
           <span className={`hand ${s.empty}`} aria-hidden="true">(the glass up top ran dry)</span>
         </p>
         <button ref={anotherRef} type="button" className={s.another} onClick={orderAnother}>
-          Order another ↑
+          Order another
         </button>
       </div>
 
@@ -50,7 +50,7 @@ export function Footer() {
             <li><a href={`mailto:${EMAIL}`}>Email</a></li>
             <li><Link to="/#letters">Write a letter</Link></li>
             <li><Link to="/#shelf">All issues</Link></li>
-            <li><Link to="/" viewTransition onClick={() => scrollTo({ top: 0 })}>Back to cover ↑</Link></li>
+            <li><Link to="/" viewTransition onClick={() => scrollTo({ top: 0 })}>Back to the cover</Link></li>
           </ul>
         </div>
         <div>

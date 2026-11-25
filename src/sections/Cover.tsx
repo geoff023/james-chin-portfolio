@@ -8,7 +8,7 @@ import { GlassStage } from './GlassStage'
 import s from './Cover.module.css'
 
 // The home page opens on the current issue's cover, built in layers that scroll at different speeds:
-// clouds (slowest) → masthead → hills (rise over the masthead) → cover lines, glass, order strip.
+// clouds (slowest), masthead, hills (rise over the masthead), then cover lines, glass, order strip.
 // One scroll-driven CSS variable (--p, 0..1) moves them all.
 export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | null; onOrder: (o: Order) => void }) {
   const ref = useRef<HTMLElement>(null)
@@ -57,9 +57,9 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
           <div className={s.sky} aria-hidden="true" />
           <img className={s.clouds} src="/images/cover/clouds.webp" alt="" width={1199} height={430} fetchPriority="high" />
           <div className={`label ${s.dateline}`}>
-            <span>Vol. 07 · No. {currentIssue.no}</span>
+            <span>Vol. 07, No. {currentIssue.no}</span>
             <span>A quarterly about what Southeast Asia drinks</span>
-            <span>Nov 2026 · RM 28</span>
+            <span>November 2026, RM 28</span>
           </div>
           <h1 id="cover-title" className={s.masthead}>
             <Misregistered>Kurang Manis</Misregistered>
@@ -82,7 +82,7 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
         <div className={s.front}>
           {/* cover flash: the issue, then who makes it */}
           <div className={s.flash}>
-            <p className={`label ${s.flashKicker}`}>Issue {currentIssue.no} · Out now</p>
+            <p className={`label ${s.flashKicker}`}>Issue {currentIssue.no}, out now</p>
             <Link to={`/issues/${currentIssue.slug}`} viewTransition className={s.flashTitle}>
               <Misregistered>{currentIssue.title}</Misregistered>
             </Link>
@@ -95,7 +95,7 @@ export function Cover({ issue, order, onOrder }: { issue: Issue; order: Order | 
               and drive the boxes.
             </p>
             <p className={s.ctas}>
-              <a href="#shelf" className={`label ${s.cta}`}>Read the issues ↓</a>
+              <a href="#shelf" className={`label ${s.cta}`}>Read the issues</a>
               <a href="#letters" className={`label ${s.ctaGhost}`}>Write to the editor</a>
             </p>
           </div>

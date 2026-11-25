@@ -1,5 +1,4 @@
 import { GlossaryTerm } from '../components/GlossaryTerm'
-import { Misregistered } from '../components/Misregistered'
 import { currentIssue } from '../data/issues'
 import s from './EditorLetter.module.css'
 
@@ -7,10 +6,6 @@ import s from './EditorLetter.module.css'
 export function EditorLetter() {
   return (
     <section id="editor" data-folio="03" className={s.letter} aria-labelledby="editor-title">
-      <div className={`label ${s.rule}`}>
-        <span>01 — From the editor</span>
-        <span>Issue {currentIssue.no}, {currentIssue.title}</span>
-      </div>
 
       <div className={s.page}>
         <figure className={s.side}>
@@ -27,7 +22,7 @@ export function EditorLetter() {
 
         <div className={s.body}>
           <h2 id="editor-title" className={s.title}>
-            <Misregistered>Dear reader,</Misregistered>
+            Dear reader,
           </h2>
           <div className={s.columns}>
             <p className={s.lede}>

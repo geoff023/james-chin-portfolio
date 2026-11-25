@@ -57,8 +57,8 @@ export default function IssuePage() {
     <article className={s.issue} style={{ '--tint': issue.accent } as CSSProperties} aria-labelledby="issue-title">
       <section className={s.hero} data-folio={cs.page}>
         <div className={s.heroText}>
-          <Link to="/#shelf" className={`label ${s.back}`}>← The Shelf</Link>
-          <p className={`label ${s.kicker}`}>Kurang Manis · Issue {issue.no}</p>
+          <Link to="/#shelf" className={`label ${s.back}`}>Back to the Shelf</Link>
+          <p className={`label ${s.kicker}`}>Kurang Manis, issue {issue.no}</p>
           <h1 id="issue-title" className={s.title}>
             <Misregistered>{issue.title}</Misregistered>
           </h1>
@@ -70,10 +70,7 @@ export default function IssuePage() {
       </section>
 
       <section className={s.block} data-folio={pg(cs.page, 2)} aria-labelledby="brief">
-        <div className={`label ${s.rule}`}>
-          <span id="brief">The brief</span>
-          <span>p. {pg(cs.page, 2)}</span>
-        </div>
+        <h2 id="brief" className={s.rule}>The brief</h2>
         <div className={s.briefRow}>
           {/* a real span for the drop cap: Chrome drops ::first-letter floats into column two of a multicol box */}
           <p className={s.brief}>
@@ -107,10 +104,7 @@ export default function IssuePage() {
       </section>
 
       <section className={s.block} data-folio={pg(cs.page, 4)} aria-labelledby="decisions">
-        <div className={`label ${s.rule}`}>
-          <span id="decisions">Creative decisions</span>
-          <span>Three things we argued about</span>
-        </div>
+        <h2 id="decisions" className={s.rule}>Three things we argued about</h2>
         <ol className={s.decisions}>
           {cs.decisions.map((d) => {
             const Art = art[d.art]
@@ -127,10 +121,7 @@ export default function IssuePage() {
 
       {slug === 'the-long-pull' && (
         <section className={s.block} data-folio={pg(cs.page, 6)} aria-labelledby="pull">
-          <div className={`label ${s.rule}`}>
-            <span id="pull">Try it: pull the tea</span>
-            <span>Drag the top mug up, or hold ↑</span>
-          </div>
+          <h2 id="pull" className={s.rule}>Pull the tea <span className={s.ruleNote}>Drag the top mug up, or hold the up arrow key.</span></h2>
           <Suspense fallback={<p className="hand">Warming the mugs…</p>}>
             <TeaPull />
           </Suspense>
@@ -138,10 +129,7 @@ export default function IssuePage() {
       )}
 
       <section className={s.block} data-folio={pg(cs.page, 8)} aria-labelledby="spreads">
-        <div className={`label ${s.rule}`}>
-          <span id="spreads">Spreads</span>
-          <span>Photographs to come; sketches stand in</span>
-        </div>
+        <h2 id="spreads" className={s.rule}>Spreads</h2>
         <div className={s.spreads}>
           {cs.spreads.map((sp, i) => {
             const Art = art[sp.art]
@@ -178,10 +166,10 @@ export default function IssuePage() {
       <nav className={s.next} aria-label="Next issue">
         <Link to={`/issues/${next.slug}`} viewTransition className={s.nextLink}>
           <span className="label">Continued on page {nextCs.page}</span>
-          <span className={s.nextTitle}>{next.title} →</span>
+          <span className={s.nextTitle}>{next.title}</span>
           <span className={s.nextDrink}>Issue {next.no}, {next.drink}</span>
         </Link>
-        <Link to="/#shelf" className={`label ${s.back}`}>← Back to the Shelf</Link>
+        <Link to="/#shelf" className={`label ${s.back}`}>Back to the Shelf</Link>
       </nav>
     </article>
   )

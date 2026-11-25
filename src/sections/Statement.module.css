@@ -3,15 +3,6 @@
   padding: clamp(4rem, 8vw, 8rem) var(--edge) var(--section-pad);
 }
 
-.rule {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 10px;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
-  border-top: 1px solid var(--hairline);
-  color: var(--ink-soft);
-}
 
 /* Nua: big serif lines stepping right, small sans paragraph tucked beside */
 .manifesto {
@@ -32,7 +23,7 @@
 .lines span { display: block; }
 .l2 { padding-left: 1.4em; }
 .l3 { padding-left: 0.4em; margin-top: 0.35em; font-style: italic; }
-.l4 { justify-self: end; color: var(--riso-red); font-style: italic; }
+.l4 { justify-self: end; font-style: italic; }
 .aside {
   grid-column: 10 / 13;
   grid-row: 1;

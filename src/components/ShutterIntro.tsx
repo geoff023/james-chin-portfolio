@@ -37,7 +37,7 @@ export function ShutterIntro() {
     <div className={s.shutter} aria-hidden="true" onAnimationEnd={done} onClick={done}>
       <div className={s.sign}>
         <span className={s.signName}>Kurang Manis</span>
-        <span className={`label ${s.signSub}`}>Buka · Open from 6am</span>
+        <span className={`label ${s.signSub}`}>Buka. Open from 6am</span>
       </div>
       <span className={`label ${s.skip}`}>Click to skip</span>
     </div>

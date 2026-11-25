@@ -22,9 +22,8 @@
   -webkit-mask: linear-gradient(#000 55%, transparent);
 }
 
-.folio { display: flex; gap: 0.6em; align-items: baseline; }
+.folio { display: flex; gap: 1.4em; align-items: baseline; } /* running head: spacing, not dashes */
 .name { font-weight: 700; text-decoration: none; }
-.sep { color: var(--ink-soft); }
 .page {
   display: inline-block;
   font-variant-numeric: tabular-nums;

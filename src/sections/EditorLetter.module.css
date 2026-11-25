@@ -8,14 +8,6 @@
   .letter { padding-top: clamp(4rem, 9vw, 6rem); background: var(--paper); } /* phones already fade under the cover */
 }
 
-.rule {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 10px;
-  border-top: 1px solid var(--hairline);
-  color: var(--ink-soft);
-}
 
 .page {
   display: grid;

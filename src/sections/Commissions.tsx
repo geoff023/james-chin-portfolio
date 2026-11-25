@@ -1,5 +1,4 @@
 import type { ComponentType, CSSProperties } from 'react'
-import { Misregistered } from '../components/Misregistered'
 import { CupSleeve, MenuBoard, Programme, Tote } from '../components/Sketches'
 import { commissions } from '../data/commissions'
 import s from './Commissions.module.css'
@@ -14,14 +13,10 @@ const plates: Record<string, [ComponentType<{ className?: string }>, ComponentTy
 export function Commissions() {
   return (
     <section id="commissions" data-folio="24" className={s.commissions} aria-labelledby="commissions-title">
-      <div className={`label ${s.rule}`}>
-        <span>04 — The studio side</span>
-        <span>How the magazine pays for itself</span>
-      </div>
 
       <div className={s.head}>
         <h2 id="commissions-title" className={s.title}>
-          <Misregistered>The Studio Side</Misregistered>
+          The studio side
         </h2>
         <p className={s.intro}>
           Between issues I art-direct for cafés, drink brands and festivals. It pays for the
@@ -54,7 +49,7 @@ export function Commissions() {
 
               <div className={s.story}>
                 <p className={`label ${s.kicker}`}>
-                  Commission · {c.year} · {c.scope.join(' / ')}
+                  {c.year}: {c.scope.join(', ').toLowerCase()}
                 </p>
                 <h3 id={`${c.slug}-title`} className={s.client}>{c.client}</h3>
                 <p className={s.storyTitle}>{c.title}</p>

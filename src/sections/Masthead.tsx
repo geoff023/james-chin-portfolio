@@ -67,10 +67,6 @@ export function Masthead() {
 
   return (
     <section id="masthead" data-folio="30" className={s.masthead} aria-labelledby="masthead-title">
-      <div className={`label ${s.rule}`}>
-        <span>05 — Masthead</span>
-        <span>The people I make it with</span>
-      </div>
 
       <h2 id="masthead-title" className={s.title}>
         <Misregistered>

@@ -6,10 +6,6 @@ import s from './Statement.module.css'
 export function Statement() {
   return (
     <section id="statement" data-folio="12" className={s.statement} aria-label="What Kurang Manis is about">
-      <div className={`label ${s.rule}`}>
-        <span>— Why it’s called less sweet</span>
-        <span>The magazine’s one rule</span>
-      </div>
 
       <div className={s.manifesto}>
         <p className={s.lines}>

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react'
 import { GlossaryTerm } from '../components/GlossaryTerm'
-import { Misregistered } from '../components/Misregistered'
 import {
   Bubbles, Cat, FilmCamera, GridPage, handCircle, Kettle, MapPin, Myvi, Stools, TwoCups, useInView,
 } from '../components/Sketches'
@@ -72,20 +71,14 @@ export function Process() {
 
   return (
     <section id="process" data-folio="16" ref={section} className={s.process} aria-labelledby="process-title">
-      <div className={`label ${s.rule}`}>
-        <span>03 — How I make an issue</span>
-        <span>Six steps, about four months</span>
-      </div>
 
       <div className={s.head}>
         <h2 id="process-title" className={s.title}>
-          <Misregistered>
-            <span className={s.swash}>H</span>ow I Make
-          </Misregistered>
-          <Misregistered className={s.title2}>an Issue</Misregistered>
+          <span>How I make</span>
+          <span className={s.title2}>an issue</span>
         </h2>
         <p className={s.intro}>
-          Every issue starts the same way: someone orders a drink and won’t stop talking about it. Usually me.
+          Every issue starts the same way: someone orders a drink and won’t stop talking about it. Usually me. Then it takes six steps and about four months.
         </p>
         <Kettle className={s.kettle} />
       </div>

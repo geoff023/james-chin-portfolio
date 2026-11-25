@@ -1,6 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { Misregistered } from '../components/Misregistered'
 import { issues, type Issue } from '../data/issues'
 import s from './Shelf.module.css'
 
@@ -11,22 +10,19 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
 
   return (
     <section id="shelf" data-folio="08" className={s.shelf} aria-labelledby="shelf-title">
-      <div className={`label ${s.rule}`}>
-        <span>02 — The Shelf</span>
-        <span>{issues.length} issues · {inPrint} in print</span>
-      </div>
 
       <div className={s.head}>
         <h2 id="shelf-title" className={s.title}>
-          <Misregistered>The Shelf</Misregistered>
+          The Shelf
         </h2>
         <p className={s.intro}>
-          Everything I’ve published since 2019, one drink each. Open a cover to read the issue, or
-          hit <i>Pour it</i> and I’ll pour that drink into the glass up top.
+          Everything I’ve published since 2019: {issues.length} issues, one drink each, {inPrint} still in
+          print. Open a cover to read the issue, or hit <i>Pour it</i> and I’ll pour that drink into the
+          glass up top.
         </p>
         {active && active.no !== issues[0].no && (
           <a href="#cover" className={`hand ${s.poured}`}>
-            {active.drink}, poured. scroll up ↑
+            {active.drink} is in the glass up top
           </a>
         )}
       </div>
@@ -44,7 +40,7 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                 <span className={s.frost} aria-hidden="true" />
                 {/* the visible text is the button's name (WCAG 2.5.3), plus a hidden hint */}
                 <span className={s.meta}>
-                  <span className="label">No. {it.no} · {it.drink}</span>
+                  <span className="label">No. {it.no}, {it.drink}</span>
                   <span className={s.cardTitle}>{it.title}</span>
                   <span className={s.cardLine}>{it.line}</span>
                   {!it.featured && <span className={s.soldNote}>Sold out. Ask your kopitiam uncle.</span>}
@@ -61,13 +57,13 @@ export function Shelf({ active, onPick }: { active: Issue | null; onPick: (i: Is
                   aria-label={`Pour ${it.drink} into the glass`}
                   onClick={() => onPick(it)}
                 >
-                  Pour it ↑
+                  Pour it
                 </button>
               )}
               </div>
               <p className={`label ${s.caption}`} aria-hidden="true">
                 <span>{it.no}</span>
-                <span className={it.featured ? s.inPrint : undefined}>{it.featured ? 'In print · read →' : it.drink}</span>
+                <span className={it.featured ? s.inPrint : undefined}>{it.featured ? 'Read the issue' : it.drink}</span>
               </p>
             </li>
           )

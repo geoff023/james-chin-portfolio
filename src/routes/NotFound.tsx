@@ -13,7 +13,7 @@ export function NotFound() {
   return (
     <section className={s.notFound} data-folio="404" aria-labelledby="nf-title">
       <KopiCup className={s.cup} />
-      <p className="label">Error 404 · page not found</p>
+      <p className="label">Error 404: page not found</p>
       <h1 id="nf-title" className={s.title}>
         <Misregistered>Too sweet.</Misregistered>
         <Misregistered className={s.l2}>Sent back.</Misregistered>

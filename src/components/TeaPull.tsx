@@ -154,7 +154,7 @@ export default function TeaPull() {
           {result ? (
             <>
               <p className={s.facts}>
-                Pull height: {result.cm}cm · Foam: {result.foam}cm · Uncle rating:{' '}
+                Pull height {result.cm}cm, foam {result.foam}cm. Uncle rating:{' '}
                 <span aria-label={`${result.stars} of 4`}>{'★'.repeat(result.stars)}{'☆'.repeat(4 - result.stars)}</span>
               </p>
               <p className={`hand ${s.verdict}`}>{verdicts[result.stars - 1]}</p>

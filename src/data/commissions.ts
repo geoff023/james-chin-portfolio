@@ -44,7 +44,7 @@ export const commissions: Commission[] = [
       'Cup sleeves printed with the kopitiam order code, so regulars can order like their uncles.',
       'Signage in enamel and plywood, built to survive six years of steam.',
     ],
-    facts: [['Outlets', '6'], ['Menu', '4 pp → 1 p'], ['Sleeves a year', '120,000'], ['Items removed', '23']],
+    facts: [['Outlets', '6'], ['Menu', '4 pages to 1'], ['Sleeves a year', '120,000'], ['Items removed', '23']],
     tint: '#F5CB4C',
     page: '27',
   },
